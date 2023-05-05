@@ -7,4 +7,5 @@ export class PersonDTO {
   adress:string = "";
   cellphoneNumber:string = "";
   password:string = "";
+  confirmedPassword:string = "";
 }

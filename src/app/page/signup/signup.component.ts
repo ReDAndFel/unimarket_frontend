@@ -16,4 +16,7 @@ export class SignupComponent {
   public registrar(){
     console.log(this.person);
   }
+  public passwordEquals():boolean{
+    return this.person.password == this.person.confirmedPassword;
+  }
 }

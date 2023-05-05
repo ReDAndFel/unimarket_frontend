@@ -1,0 +1,27 @@
+<h1>Información de metodo de pago</h1>
+
+<form class="form_add_payment_method" (ngSubmit)="updatePaymentMethod()">
+
+  <div class="text-field">
+    <label >Numero de tarjeta: </label>
+    <input type="number" name="cardNumber" [(ngModel)]="paymentMethod.cardNumber" maxlength="16" required>
+  </div>
+  <div class="text-field">
+    <label >Nombre del titular: </label>
+    <input type="text" name="titularName" [(ngModel)]="paymentMethod.titularName" maxlength="100" required>
+  </div>
+  <div class="text-field">
+    <label >Entidad bancaria: </label>
+    <input type="text" name="bankingEntity" [(ngModel)]="paymentMethod.bankingEntity" maxlength="50" required>
+  </div>
+  <div class="text-field">
+    <label >Fecha de expiración: </label>
+    <input type="date" name="expirationDate" [(ngModel)]="paymentMethod.expirationDate" required>
+  </div>
+  <div class="text-field">
+    <label >Cvv: </label>
+    <input type="number" name="cvv" [(ngModel)]="paymentMethod.cvv" maxlength="3" required>
+  </div>
+  <button type="submit">Guardar cambios</button>
+</form>
+

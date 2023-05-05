@@ -3,38 +3,43 @@
 <form class="form_signup" (ngSubmit)="registrar()">
 
   <div class="text-field">
-    <label >documento de identidad: </label>
-    <input type="text" name="id" [(ngModel)]="person.id" required/>
+    <label >Documento de identidad: </label>
+    <input type="text" name="id" [(ngModel)]="person.id" required>
   </div>
   <div class="text-field">
     <label >Nombre: </label>
-    <input type="text" name="name" [(ngModel)]="person.name" required />
+    <input type="text" name="name" [(ngModel)]="person.name" required>
   </div>
   <div class="text-field">
     <label >Email: </label>
-    <input type="email" name="email" [(ngModel)]="person.email" required email/>
+    <input type="email" name="email" [(ngModel)]="person.email" email required>
   </div>
   <div class="text-field">
     <label >Pais: </label>
-    <input type="text" name="country" [(ngModel)]="person.country" required />
+    <input type="text" name="country" [(ngModel)]="person.country" required>
   </div>
   <div class="text-field">
     <label >Ciudad: </label>
-    <input type="text" name="city" [(ngModel)]="person.city" required />
+    <input type="text" name="city" [(ngModel)]="person.city" required>
   </div>
   <div class="text-field">
     <label >Dirección: </label>
-    <input type="text" name="adress" [(ngModel)]="person.adress" required />
+    <input type="text" name="adress" [(ngModel)]="person.adress" required>
   </div>
   <div class="text-field">
     <label >Teléfono: </label>
-    <input type="text" name="cellphoneNumber" [(ngModel)]="person.cellphoneNumber" required/>
+    <input type="number" name="cellphoneNumber" [(ngModel)]="person.cellphoneNumber" required>
   </div>
   <div class="text-field">
     <label >Contraseña: </label>
-    <input type="password" name="password" [(ngModel)]="person.password" required/>
+    <input type="password" name="password" [(ngModel)]="person.password" required>
   </div>
-  <button type="submit">Registrarse</button>
+  <div class="text-field">
+    <label >Confirmar contraseña: </label>
+    <input type="password" name="confirmedPassword" [(ngModel)]="person.confirmedPassword" required>
+  </div>
+  <p *ngIf="!passwordEquals()" >Las contraseñas no coinciden</p>
+  <button type="submit" [disabled]="!passwordEquals()">Registrarse</button>
 </form>
 
 <div class="login_link">
