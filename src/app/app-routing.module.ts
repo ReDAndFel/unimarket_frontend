@@ -6,9 +6,13 @@ import { LoginComponent } from './page/login/login.component';
 import { SignupComponent } from './page/signup/signup.component';
 import {RestorePasswordComponent} from "./page/restore-password/restore-password.component";
 import {InfoPersonComponent} from "./page/info-person/info-person.component";
-import {AddPaymentMethodComponent} from "./page/add-payment-method/add-payment-method.component";
-import {UpdatePaymentMethodComponent} from "./page/update-payment-method/update-payment-method.component";
+import {PaymentMethodComponent} from "./page/payment-method/payment-method.component";
 import {ChangePasswordComponent} from "./page/change-password/change-password.component";
+import {ProductComponent} from "./page/product/product.component";
+import {AccountComponent} from "./page/account/account.component";
+import {CartComponent} from "./page/cart/cart.component";
+import {CategoryComponent} from "./page/category/category.component";
+
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "login", component: LoginComponent },
@@ -17,8 +21,11 @@ const routes: Routes = [
   { path: "restore_password", component: RestorePasswordComponent },
   { path: "change_password", component: ChangePasswordComponent },
   { path: "info_person", component: InfoPersonComponent },
-  { path: "add_payment_method", component: AddPaymentMethodComponent },
-  { path: "update_payment_method", component: UpdatePaymentMethodComponent },
+  { path: "payment_method", component: PaymentMethodComponent },
+  { path: "product", component: ProductComponent },
+  { path: "account", component: AccountComponent },
+  { path: "cart", component: CartComponent },
+  { path: "category", component: CategoryComponent },
   { path: "**", pathMatch: "full", redirectTo: "" }
 ];
 @NgModule({

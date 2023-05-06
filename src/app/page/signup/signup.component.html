@@ -1,45 +1,45 @@
 <h1>Registrarse</h1>
 
-<form class="form_signup" (ngSubmit)="registrar()">
+<form class="form_signup" (ngSubmit)="register()">
 
   <div class="text-field">
     <label >Documento de identidad: </label>
-    <input type="text" name="id" [(ngModel)]="person.id" required>
+    <input #id="ngModel" [ngClass]="id.invalid && (id.dirty || id.touched) ? 'is-invalid' : ''" type="number" name="id" [(ngModel)]="person.id" maxlength="100" required>
   </div>
   <div class="text-field">
     <label >Nombre: </label>
-    <input type="text" name="name" [(ngModel)]="person.name" required>
+    <input #name="ngModel" [ngClass]="name.invalid && (name.dirty || name.touched) ? 'is-invalid' : ''"type="text" name="name" [(ngModel)]="person.name" maxlength="100" required>
   </div>
   <div class="text-field">
     <label >Email: </label>
-    <input type="email" name="email" [(ngModel)]="person.email" email required>
+    <input #email="ngModel" [ngClass]="email.invalid && (email.dirty || email.touched) ? 'is-invalid' : ''" type="email" name="email" [(ngModel)]="person.email" email maxlength="100" required>
   </div>
   <div class="text-field">
     <label >Pais: </label>
-    <input type="text" name="country" [(ngModel)]="person.country" required>
+    <input #country="ngModel" [ngClass]="country.invalid && (country.dirty || country.touched) ? 'is-invalid' : ''" type="text" name="country" [(ngModel)]="person.country" maxlength="100" required>
   </div>
   <div class="text-field">
     <label >Ciudad: </label>
-    <input type="text" name="city" [(ngModel)]="person.city" required>
+    <input #city="ngModel" [ngClass]="city.invalid && (city.dirty || city.touched) ? 'is-invalid' : ''" type="text" name="city" [(ngModel)]="person.city" maxlength="100" required>
   </div>
   <div class="text-field">
     <label >Dirección: </label>
-    <input type="text" name="adress" [(ngModel)]="person.adress" required>
+    <input #adress="ngModel" [ngClass]="adress.invalid && (adress.dirty || adress.touched) ? 'is-invalid' : ''" type="text" name="adress" required [(ngModel)]="person.adress" maxlength="100" >
   </div>
   <div class="text-field">
     <label >Teléfono: </label>
-    <input type="number" name="cellphoneNumber" [(ngModel)]="person.cellphoneNumber" required>
+    <input #cellphoneNumber="ngModel" [ngClass]="cellphoneNumber.invalid && (cellphoneNumber.dirty || cellphoneNumber.touched) ? 'is-invalid' : ''" type="number" name="cellphoneNumber" [(ngModel)]="person.cellphoneNumber" maxlength="15" required>
   </div>
   <div class="text-field">
     <label >Contraseña: </label>
-    <input type="password" name="password" [(ngModel)]="person.password" required>
+    <input #password="ngModel" [ngClass]="password.invalid && (password.dirty || password.touched) ? 'is-invalid' : ''" type="password" name="password" [(ngModel)]="person.password" required>
   </div>
   <div class="text-field">
     <label >Confirmar contraseña: </label>
-    <input type="password" name="confirmedPassword" [(ngModel)]="person.confirmedPassword" required>
+    <input #confirmedPassword="ngModel" [ngClass]="confirmedPassword.invalid && (confirmedPassword.dirty || confirmedPassword.touched) ? 'is-invalid' : ''" type="password" name="confirmedPassword" [(ngModel)]="person.confirmedPassword" required>
   </div>
   <p *ngIf="!passwordEquals()" >Las contraseñas no coinciden</p>
-  <button type="submit" [disabled]="!passwordEquals()">Registrarse</button>
+  <button type="submit" value="register" name="btnRegister" [disabled]="!passwordEquals()">Registrarse</button>
 </form>
 
 <div class="login_link">

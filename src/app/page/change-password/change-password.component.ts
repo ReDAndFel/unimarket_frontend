@@ -11,7 +11,7 @@ export class ChangePasswordComponent {
   constructor() {
     this.changePassword = new PasswordDTO();
   }
-  public restorePasswordFunction(){
+  public changePasswordFunction(){
     console.log(this.changePassword);
   }
   public passwordEquals():boolean{

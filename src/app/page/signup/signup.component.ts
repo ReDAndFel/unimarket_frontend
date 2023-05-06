@@ -13,9 +13,10 @@ export class SignupComponent {
   constructor(){
     this.person = new PersonDTO();
   }
-  public registrar(){
+  public register(){
     console.log(this.person);
   }
+
   public passwordEquals():boolean{
     return this.person.password == this.person.confirmedPassword;
   }

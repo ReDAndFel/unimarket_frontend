@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -9,9 +10,14 @@ import { SignupComponent } from './page/signup/signup.component';
 import { ForgetPasswordComponent } from './page/forget-password/forget-password.component';
 import { RestorePasswordComponent } from './page/restore-password/restore-password.component';
 import { InfoPersonComponent } from './page/info-person/info-person.component';
-import { AddPaymentMethodComponent } from './page/add-payment-method/add-payment-method.component';
+import { PaymentMethodComponent } from './page/payment-method/payment-method.component';
 import { ChangePasswordComponent } from './page/change-password/change-password.component';
-import { UpdatePaymentMethodComponent } from './page/update-payment-method/update-payment-method.component';
+import { ProductComponent } from './page/product/product.component';
+import { AccountComponent } from './page/account/account.component';
+import { CartComponent } from './page/cart/cart.component';
+import { CategoryComponent } from './page/category/category.component';
+
+
 
 @NgModule({
   declarations: [
@@ -22,12 +28,16 @@ import { UpdatePaymentMethodComponent } from './page/update-payment-method/updat
     ForgetPasswordComponent,
     RestorePasswordComponent,
     InfoPersonComponent,
-    AddPaymentMethodComponent,
+    PaymentMethodComponent,
     ChangePasswordComponent,
-    UpdatePaymentMethodComponent
+    ProductComponent,
+    AccountComponent,
+    CartComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     AppRoutingModule,
     FormsModule
   ],

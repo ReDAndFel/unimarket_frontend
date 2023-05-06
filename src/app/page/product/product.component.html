@@ -1,0 +1,35 @@
+<h1>Información del producto</h1>
+<form (ngSubmit)="createProduct()">
+  <div>
+    <label >Nombre: </label>
+    <input type="text"  name="name" [(ngModel)]="product.title" required />
+  </div>
+  <div>
+    <label >Descripcion: </label>
+    <input type="text"  name="description" [(ngModel)]="product.description" required  />
+  </div>
+  <div>
+    <label >Precio: </label>
+    <input type="number"  name="price" [(ngModel)]="product.realPrice" required />
+  </div>
+  <div>
+    <label >Unidades: </label>
+    <input type="number"  name="units" [(ngModel)]="product.units" required  />
+  </div>
+  <div>
+  <label >Descuento: </label>
+  <input type="number"  name="discount" [(ngModel)]="product.discount"  />
+  </div>
+  <div>
+    <label >Imagen: </label>
+     <input type="file"  name="images" (change)="onFileChange($event)" multiple />
+  </div>
+  <div>
+    <label >Categoría: </label>
+    <select name="category" [(ngModel)]="product.category" required>
+      <option value="" selected >Seleccione una categoría</option>
+      <option [value]="i+1" *ngFor="let item of categories; index as i"> {{item}} </option>
+    </select >
+  </div>
+  <button type="submit" >Publicar producto</button>
+</form>
