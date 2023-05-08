@@ -30,6 +30,7 @@ export class ProductComponent {
 
   createProduct(){
     if(this.images != null && this.images.length > 0){
+      this.product.images = this.images ;
       console.log(this.product);
     }else{
       console.log('Debe seleccionar al menos una imagen');
@@ -37,6 +38,7 @@ export class ProductComponent {
   }
   updateProduct(){
     if(this.images != null && this.images.length > 0){
+      this.product.images = this.images ;
       console.log(this.product);
     }else{
       console.log('Debe seleccionar al menos una imagen');

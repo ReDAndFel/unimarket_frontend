@@ -1,5 +1,5 @@
 <h1>Información del producto</h1>
-<form (ngSubmit)="createProduct()">
+<form #f="ngForm" (ngSubmit)="createProduct()">
   <div>
     <label >Nombre: </label>
     <input type="text"  name="name" [(ngModel)]="product.title" required />
@@ -31,5 +31,5 @@
       <option [value]="i+1" *ngFor="let item of categories; index as i"> {{item}} </option>
     </select >
   </div>
-  <button type="submit" >Publicar producto</button>
+  <button type="submit" [disabled]="f.invalid" >Publicar producto</button>
 </form>

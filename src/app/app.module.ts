@@ -16,6 +16,7 @@ import { ProductComponent } from './page/product/product.component';
 import { AccountComponent } from './page/account/account.component';
 import { CartComponent } from './page/cart/cart.component';
 import { CategoryComponent } from './page/category/category.component';
+import { SearchComponent } from './page/search/search.component';
 
 
 
@@ -33,7 +34,8 @@ import { CategoryComponent } from './page/category/category.component';
     ProductComponent,
     AccountComponent,
     CartComponent,
-    CategoryComponent
+    CategoryComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

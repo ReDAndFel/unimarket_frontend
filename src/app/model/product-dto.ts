@@ -6,7 +6,7 @@ export class ProductDTO {
   realPrice:string = "";
   category:string = "";
   discount:string = "";
-  images: string[] = [];
+  images!: FileList;
 
 
 }

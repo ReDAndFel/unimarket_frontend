@@ -12,6 +12,7 @@ import {ProductComponent} from "./page/product/product.component";
 import {AccountComponent} from "./page/account/account.component";
 import {CartComponent} from "./page/cart/cart.component";
 import {CategoryComponent} from "./page/category/category.component";
+import {SearchComponent} from "./page/search/search.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: "account", component: AccountComponent },
   { path: "cart", component: CartComponent },
   { path: "category", component: CategoryComponent },
+  { path: "search/:texto", component: SearchComponent },
   { path: "**", pathMatch: "full", redirectTo: "" }
 ];
 @NgModule({
