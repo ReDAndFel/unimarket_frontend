@@ -10,13 +10,17 @@ import { SignupComponent } from './page/signup/signup.component';
 import { ForgetPasswordComponent } from './page/forget-password/forget-password.component';
 import { RestorePasswordComponent } from './page/restore-password/restore-password.component';
 import { InfoPersonComponent } from './page/info-person/info-person.component';
-import { PaymentMethodComponent } from './page/payment-method/payment-method.component';
+import { PaymentMethodInfoComponent } from './page/payment-method-info/payment-method-info.component';
 import { ChangePasswordComponent } from './page/change-password/change-password.component';
 import { ProductComponent } from './page/product/product.component';
 import { AccountComponent } from './page/account/account.component';
 import { CartComponent } from './page/cart/cart.component';
 import { CategoryComponent } from './page/category/category.component';
-import { SearchComponent } from './page/search/search.component';
+import { ManagementProductsComponent } from './page/management-products/management-products.component';
+import { PaymentMethodComponent } from './page/payment-method/payment-method.component';
+import { CategoryCardComponent } from './page/category-card/category-card.component';
+import { BuysComponent } from './page/buys/buys.component';
+import { SellsComponent } from './page/sells/sells.component';
 
 
 
@@ -29,13 +33,17 @@ import { SearchComponent } from './page/search/search.component';
     ForgetPasswordComponent,
     RestorePasswordComponent,
     InfoPersonComponent,
-    PaymentMethodComponent,
+    PaymentMethodInfoComponent,
     ChangePasswordComponent,
     ProductComponent,
     AccountComponent,
     CartComponent,
     CategoryComponent,
-    SearchComponent
+    ManagementProductsComponent,
+    PaymentMethodComponent,
+    CategoryCardComponent,
+    BuysComponent,
+    SellsComponent
   ],
   imports: [
     BrowserModule,

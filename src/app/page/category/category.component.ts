@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {CategoryService} from "../../service/category.service";
+import {CategoryDTO} from "../../model/category-dto";
 
 @Component({
   selector: 'app-category',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent {
+  categories: CategoryDTO[];
 
+  constructor(private categoryService: CategoryService) {
+    this.categories = this.categoryService.listar();
+  }
 }

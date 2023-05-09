@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {PersonDTO} from "../../model/person-dto";
 import {LoginDTO} from "../../model/login-dto";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -9,11 +10,12 @@ import {LoginDTO} from "../../model/login-dto";
 })
 export class LoginComponent {
   login:LoginDTO;
-  constructor(){
+  constructor(public router:Router){
     this.login = new LoginDTO();
   }
-  public iniciarSesion(){
+  public signIn(){
     console.log(this.login);
+    this.router.navigateByUrl("/");
   }
 }
 

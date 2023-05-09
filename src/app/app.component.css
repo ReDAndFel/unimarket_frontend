@@ -26,7 +26,6 @@ body, html {
   max-height: 90%;
   overflow: scroll;
   color: #fff;
-  padding: 1em 1em 0 1em;
 }
 .nav{
   min-height: 10vh;
