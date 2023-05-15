@@ -21,6 +21,7 @@ import { PaymentMethodComponent } from './page/payment-method/payment-method.com
 import { CategoryCardComponent } from './page/category-card/category-card.component';
 import { BuysComponent } from './page/buys/buys.component';
 import { SellsComponent } from './page/sells/sells.component';
+import { DetailProductComponent } from './page/detail-product/detail-product.component';
 
 
 
@@ -43,7 +44,8 @@ import { SellsComponent } from './page/sells/sells.component';
     PaymentMethodComponent,
     CategoryCardComponent,
     BuysComponent,
-    SellsComponent
+    SellsComponent,
+    DetailProductComponent
   ],
   imports: [
     BrowserModule,

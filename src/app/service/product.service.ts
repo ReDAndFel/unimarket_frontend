@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {forwardRef, Injectable} from '@angular/core';
 import {ProductGetDTO} from "../model/product-get-dto";
 @Injectable({
   providedIn: 'root'
@@ -14,5 +14,13 @@ export class ProductService {
   }
   public listar():ProductGetDTO[]{
     return this.products;
+  }
+
+  public get(idProduct:number) {
+    this.products.forEach(product => {
+      if(product.id == idProduct) {
+        return product;
+      }
+    });
   }
 }

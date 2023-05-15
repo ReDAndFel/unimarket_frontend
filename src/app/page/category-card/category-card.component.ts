@@ -6,7 +6,6 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./category-card.component.css']
 })
 export class CategoryCardComponent{
-@Input() name:string;
-@Input() image:string;
+
   constructor() {}
 }
