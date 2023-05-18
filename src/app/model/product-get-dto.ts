@@ -1,5 +1,5 @@
 export class ProductGetDTO {
-  
+
   id:number = 0;
   deadline:Date = new Date();
   title:string = "";
@@ -15,7 +15,7 @@ export class ProductGetDTO {
   creationDate:Date = new Date();
   images!: FileList;
 
-  constructor(id: number, deadline: Date, title: string, puntuation: number, description: string, units: number, realPrice: number, price: number, idPerson: string, idCategory: number, discount: number, stateProduct: number, creationDate: Date, images: FileList) {
+  constructor(id: number, deadline: Date, title: string, puntuation: number, description: string, units: number, realPrice: number, price: number, idPerson: string, idCategory: number, discount: number, stateProduct: number, creationDate: Date) {
     this.id = id;
     this.deadline = deadline;
     this.title = title;
@@ -29,7 +29,6 @@ export class ProductGetDTO {
     this.discount = discount;
     this.stateProduct = stateProduct;
     this.creationDate = creationDate;
-    this.images = images;
   }
 
 }

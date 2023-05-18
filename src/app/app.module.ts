@@ -23,6 +23,7 @@ import { DetailProductComponent } from './page/detail-product/detail-product.com
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './page/alert/alert.component';
+import { ItemProductoComponent } from './page/item-producto/item-producto.component';
 
 
 
@@ -46,7 +47,8 @@ import { AlertComponent } from './page/alert/alert.component';
     BuysComponent,
     SellsComponent,
     DetailProductComponent,
-    AlertComponent
+    AlertComponent,
+    ItemProductoComponent
   ],
   imports: [
     BrowserModule,
