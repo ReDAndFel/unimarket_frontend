@@ -11,6 +11,7 @@ import {ProductGetDTO} from "../../model/product-get-dto";
 export class HomeComponent {
 
   textoBusqueda:string;
+  filter:string;
   products:ProductGetDTO[];
   filtro:ProductGetDTO[]
 
@@ -21,12 +22,21 @@ export class HomeComponent {
     this.filtro = [];
 
     this.textoBusqueda = "";
+    this.filter = "";
     this.route.params.subscribe(params => {
-      this.textoBusqueda = params["texto"];
-      if(this.textoBusqueda!=null) {
-        this.filtro = this.products.filter(p =>
-          p.title.toLowerCase().includes(this.textoBusqueda.toLowerCase())
-        );
+      this.textoBusqueda = params["text"];
+      this.filter = params["filter"];
+      if(this.textoBusqueda!=null && this.filter!=null) {
+        if(this.filter == "categoria"){
+          this.filtro = this.products.filter(p =>
+            p.category.toLowerCase().includes(this.textoBusqueda.toLowerCase())
+          );
+        }
+        if(this.filter == "busqueda"){
+          this.filtro = this.products.filter(p =>
+            p.title.toLowerCase().includes(this.textoBusqueda.toLowerCase())
+          );
+        }        
       }else{
         this.filtro = this.products;
       }
@@ -36,7 +46,7 @@ export class HomeComponent {
   }
   public iraBusqueda(valor:string){
     if(valor){
-      this.router.navigate(["/home", valor]);
+      this.router.navigate(["/busqueda", valor]);
     }
   }
 }

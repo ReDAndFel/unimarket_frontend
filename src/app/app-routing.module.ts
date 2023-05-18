@@ -15,32 +15,31 @@ import {CartComponent} from "./page/cart/cart.component";
 import {CategoryComponent} from "./page/category/category.component";
 import {ManagementProductsComponent} from "./page/management-products/management-products.component";
 import {BuysComponent} from "./page/buys/buys.component";
-import {SellsComponent} from "./page/sells/sells.component";
 import { DetailProductComponent } from './page/detail-product/detail-product.component';
+
 
 
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "home/:texto", component: HomeComponent },
-  { path: "home/categoria/:texto", component: HomeComponent },
+  { path: ":filter/:text", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
-  { path: "forget_password", component: ForgetPasswordComponent },
+  { path: "olvide_mi_contraseña", component: ForgetPasswordComponent },
   { path: "restore_password", component: RestorePasswordComponent },
   { path: "change_password", component: ChangePasswordComponent },
   { path: "info_person", component: InfoPersonComponent },
-  { path: "payment_method_info", component: PaymentMethodInfoComponent },
-  { path: "payment_method", component: PaymentMethodComponent},
-  { path: "product", component: ProductComponent },
-  { path: "account", component: AccountComponent },
-  { path: "cart", component: CartComponent },
-  { path: "category", component: CategoryComponent },
-  { path: "management_products", component: ManagementProductsComponent },
-  { path: "buys", component: BuysComponent },
-  { path: "sells", component: SellsComponent },
-  { path: "cart", component: CartComponent },
-  { path: "product/:idProduct", component: DetailProductComponent },
+  { path: "añadir_metodo_de_pago", component: PaymentMethodInfoComponent },
+  { path: "metodo_de_pago/:id", component: PaymentMethodInfoComponent },
+  { path: "metodos_de_pago", component: PaymentMethodComponent},
+  { path: "crear_producto", component: ProductComponent },
+  { path: "editar_producto/:id", component: ProductComponent },
+  { path: "cuenta", component: AccountComponent },
+  { path: "carrito", component: CartComponent },
+  { path: "categoria", component: CategoryComponent },
+  { path: "gestion_productos", component: ManagementProductsComponent },
+  { path: "compras", component: BuysComponent },  
+  { path: "producto/:id", component: DetailProductComponent },
   
   { path: "**", pathMatch: "full", redirectTo: "" }
 ];

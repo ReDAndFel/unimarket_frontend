@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import {CategoryService} from "../../service/category.service";
 import {CategoryDTO} from "../../model/category-dto";
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from 'src/app/service/product.service';
+import { ProductGetDTO } from 'src/app/model/product-get-dto';
 
 @Component({
   selector: 'app-category',
@@ -10,13 +12,16 @@ import { Router } from '@angular/router';
 })
 export class CategoryComponent {
   categories: CategoryDTO[];
+  products:ProductGetDTO[];
+  filtro:ProductGetDTO[];  
 
-  constructor(private categoryService: CategoryService,private router: Router) {
+  constructor(private categoryService: CategoryService,private router: Router, private productService:ProductService) {
     this.categories = this.categoryService.listar();
+    this.products = this.productService.listar();
+    this.filtro = [];
   }
 
   public selectCategory(category:string){
-    console.log("bien");
-    this.router.navigate(["/home/categoria",category]);
+    this.router.navigate(["/categoria",category]);        
   }
 }

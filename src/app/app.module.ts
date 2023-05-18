@@ -18,12 +18,11 @@ import { CategoryComponent } from './page/category/category.component';
 import { ManagementProductsComponent } from './page/management-products/management-products.component';
 import { PaymentMethodComponent } from './page/payment-method/payment-method.component';
 import { BuysComponent } from './page/buys/buys.component';
-import { SellsComponent } from './page/sells/sells.component';
 import { DetailProductComponent } from './page/detail-product/detail-product.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './page/alert/alert.component';
-import { ItemProductoComponent } from './page/item-producto/item-producto.component';
+import { ProductCardComponent } from './page/product-card/product-card.component';
 
 
 
@@ -44,11 +43,10 @@ import { ItemProductoComponent } from './page/item-producto/item-producto.compon
     CategoryComponent,
     ManagementProductsComponent,
     PaymentMethodComponent,
-    BuysComponent,
-    SellsComponent,
+    BuysComponent,   
     DetailProductComponent,
     AlertComponent,
-    ItemProductoComponent
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,

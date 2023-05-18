@@ -4,7 +4,7 @@
             data-bs-toggle="modal" data-bs-target="#borrar"><i class="fa-solid fa-trash me-1"></i> Eliminar
       {{textBtnDelete}}</button>
   </div>
-  <table class="table table-striped table-hover">
+  <table class="table ">
     <thead>
     <tr>
       <th></th>
@@ -23,11 +23,12 @@
       <td ><p>{{item.description}}</p></td>
       <td ><p>{{item.price}}</p></td>
       <td ><p>{{item.units}}</p></td>
-      <td ><img [src]="item.images[0]" width="120" /> </td>
-      <td><p>{{item.idCategory}}</p></td>
+      <!-- <td ><img [src]="item.images[0]" width="120" /> </td>-->
+      <td > <img src="https://www.mountaingoatsoftware.com/uploads/blog/2016-09-06-what-is-a-product.png" alt="img" width="120"></td>
+      <td><p>{{item.category}}</p></td>
       <td>
-        <button type="button" class="btn btn-warning rounded-circle me-2" (click)="updateProduct(item)"
-                data-bs-toggle="modal" data-bs-target="#crear"><i class="fa-solid fa-pen"></i></button>
+        <button type="button" class="btn btn-warning rounded-circle me-2" (click)="updateProduct(item.id)">
+                <i class="fa-solid fa-pen" style="color: white;"></i></button>
       </td>
     </tr>
     </tbody>

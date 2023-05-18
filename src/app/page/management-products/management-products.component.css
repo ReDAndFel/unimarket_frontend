@@ -1,0 +1,19 @@
+.modal{
+    color: #000;
+}
+.card{
+    background-color: #2e2e2e;
+}
+
+thead, tbody{
+    color: #ffffff;
+}
+
+th{
+    font-weight: bold;
+}
+
+.btn:hover{
+    background-color: #a89335;
+
+}

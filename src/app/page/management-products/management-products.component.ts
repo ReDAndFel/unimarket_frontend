@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {ProductService} from "../../service/product.service";
 import {ProductGetDTO} from "../../model/product-get-dto";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-management-products',
@@ -15,7 +16,7 @@ export class ManagementProductsComponent {
   btnText:string;
   iconText:string;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService,private router: Router) {
     this.products = [];
     this.selectedList = [];
     this.textBtnDelete = "";
@@ -57,16 +58,8 @@ export class ManagementProductsComponent {
     this.updateMessage();
   }
 
-  public createProduct() {
-    this.btnText = "Crear nuevo";
-    this.iconText = "plus";
-    this.selected = (new ProductGetDTO(0, new Date(), "", 0, "", 0, 0, 0, "", 0, 0, 0, new Date()));
-  }
-
-  public updateProduct(item:ProductGetDTO) {
-    this.btnText = "Actualizar";
-    this.iconText = "pencil";
-    this.selected = Object.create(item);
+  public updateProduct(id:number) {
+    this.router.navigate(["/editar_producto",id]); 
   }
   public sendInfo() {
     if(this.btnText == "Actualizar"){

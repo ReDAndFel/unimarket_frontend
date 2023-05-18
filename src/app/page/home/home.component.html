@@ -4,9 +4,9 @@
          placeholder="Search..." aria-label="Search">
 </form>
 
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  <div class="col" *ngFor="let item of filtro">
-    <app-item-producto [object]="item"  ></app-item-producto>
+<div id="products_container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  <div class="col" *ngFor="let product of filtro">
+    <app-product-card [product]="product"></app-product-card>
   </div>
 </div>
 
