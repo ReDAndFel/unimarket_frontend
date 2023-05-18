@@ -21,9 +21,11 @@ export class HomeComponent {
     this.filtro = [];
 
     this.textoBusqueda = "";
-    this.route.params.subscribe(params => {this.textoBusqueda = params["texto"];
-    this.filtro = this.products.filter( p =>
-    p.title.toLowerCase().includes(this.textoBusqueda.toLowerCase()) );
+    this.route.params.subscribe(params => {
+      this.textoBusqueda = params["texto"];
+      this.filtro = this.products.filter( p =>
+        p.title.toLowerCase().includes(this.textoBusqueda.toLowerCase())
+      );
     });
 
 

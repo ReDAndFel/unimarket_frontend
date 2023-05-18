@@ -1,22 +1,26 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  productos: number[];
+  products: number[];
   constructor() {
-    this.productos = [];
+    this.products = []; 
   }
-  public agregar(codigo: number) {
-    this.productos.push(codigo);
+  public addProduct(idProduct:number) {
+      if(!this.products.includes(idProduct)){
+        this.products.push(idProduct);
+        console.log("Se agregó el producto con id " + idProduct);
+      }
   }
-  public quitar(codigo: number) {
-    let indice = this.productos.indexOf(codigo);
-    this.productos.splice(indice, 1);
+  public removeProduct(id: number) {
+    let indice = this.products.indexOf(id);
+    this.products.splice(indice, 1);
   }
-  public listar(): number[] {
-    return this.productos;
+  public listProducts(): number[] {
+    return this.products;
   }
 }

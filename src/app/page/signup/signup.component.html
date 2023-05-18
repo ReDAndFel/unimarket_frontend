@@ -1,3 +1,4 @@
+
 <h1>Registrarse</h1>
 
 <form class="form_signup" (ngSubmit)="register()">
@@ -40,8 +41,10 @@
   </div>
   <p *ngIf="!passwordEquals()" >Las contraseñas no coinciden</p>
   <button type="submit" value="register" name="btnRegister" [disabled]="!passwordEquals()">Registrarse</button>
+  <app-alert [alert] = "alert"></app-alert>
 </form>
 
 <div class="login_link">
   <p>¿Ya tienes cuenta? <span><a href="/login">Iniciar Sesión</a></span></p>
 </div>
+

@@ -1,10 +1,9 @@
 import {ProductGetDTO} from "./product-get-dto";
 
 export class TransactionDetailDto {
-  constructor(product: any, number: number) {
+  constructor(product: any, units: number) {
     
   }
-
 
   product!: ProductGetDTO;
   units: number = 0;

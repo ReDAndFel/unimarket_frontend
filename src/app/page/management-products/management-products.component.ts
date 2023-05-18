@@ -60,7 +60,7 @@ export class ManagementProductsComponent {
   public createProduct() {
     this.btnText = "Crear nuevo";
     this.iconText = "plus";
-    this.selected = (new ProductGetDTO(0, "", "", "", "", "", "", "", "", 0, 0, 0, "", ""));
+    this.selected = (new ProductGetDTO(0, new Date(), "", 0, "", 0, 0, 0, "", 0, 0, 0, new Date(), new FileList()));
   }
 
   public updateProduct(item:ProductGetDTO) {

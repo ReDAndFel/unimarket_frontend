@@ -16,11 +16,14 @@ import {CategoryComponent} from "./page/category/category.component";
 import {ManagementProductsComponent} from "./page/management-products/management-products.component";
 import {BuysComponent} from "./page/buys/buys.component";
 import {SellsComponent} from "./page/sells/sells.component";
+import { DetailProductComponent } from './page/detail-product/detail-product.component';
+
 
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "home/:texto", component: HomeComponent },
+  { path: "home/categoria/:texto", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
   { path: "forget_password", component: ForgetPasswordComponent },
@@ -33,9 +36,12 @@ const routes: Routes = [
   { path: "account", component: AccountComponent },
   { path: "cart", component: CartComponent },
   { path: "category", component: CategoryComponent },
-  { path: "management_product", component: ManagementProductsComponent },
+  { path: "management_products", component: ManagementProductsComponent },
   { path: "buys", component: BuysComponent },
   { path: "sells", component: SellsComponent },
+  { path: "cart", component: CartComponent },
+  { path: "product/:idProduct", component: DetailProductComponent },
+  
   { path: "**", pathMatch: "full", redirectTo: "" }
 ];
 @NgModule({

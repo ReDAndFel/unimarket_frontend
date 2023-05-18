@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {PersonDTO} from "../../model/person-dto";
+import { AuthService } from 'src/app/service/auth.service';
+import { Alert } from 'src/app/model/alert';
 
 @Component({
   selector: 'app-signup',
@@ -9,12 +11,23 @@ import {PersonDTO} from "../../model/person-dto";
 })
 
 export class SignupComponent {
+[x: string]: any;
   person:PersonDTO;
-  constructor(){
+  alert!:Alert;
+  constructor(private authService:AuthService){
     this.person = new PersonDTO();
   }
+  
   public register(){
-    console.log(this.person);
+    const object = this;
+    this.authService.registrar(this.person).subscribe({
+      next: data => {
+        object.alert = new Alert(data.respuesta, "success");
+      },
+      error: error => {
+        object.alert = new Alert(error.error.respuesta, "danger");
+      }
+      });
   }
 
   public passwordEquals():boolean{

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CartService } from "../../service/cart.service";
 import {ProductGetDTO} from "../../model/product-get-dto";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detail-product',
@@ -10,13 +11,15 @@ import {ProductGetDTO} from "../../model/product-get-dto";
 export class DetailProductComponent {
   cartService:CartService;
   productGetDTO!: ProductGetDTO;
+  idProduct!:number;
 
-  constructor() {
+  constructor(private route:ActivatedRoute) {
     this.cartService = new CartService();
+    this.route.params.subscribe(params => {this.idProduct = parseInt(params["idProduct"])})
   }
 
-  public agregarCarrito(){
-    this.cartService.agregar(this.productGetDTO.id);
+  public addCart(){
+    this.cartService.addProduct(this.idProduct);
   }
 
 }

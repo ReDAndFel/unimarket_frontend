@@ -1,5 +1,5 @@
 <div class="card p-5">
-  <form #f="ngForm" *ngIf="product.length > 0" >
+  <form #f="ngForm" *ngIf="products.length > 0" >
     <div class="table-responsive text-center">
       <table class="table table-hover" >
         <thead>
@@ -12,24 +12,24 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of productos">
+        <tr *ngFor="let item of products">
           <td></td>
           <td>
             <div class="d-flex text-start align-items-center" >
               <div class="col-4 me-3 ms-3" >
-                <img [src]="item.producto.imagenes[0]" width="100%" />
+                <img [src]="item.product.images[0]" width="100%" />
               </div>
-              <span class="col-8" >{{item.producto.nombre}}</span>
+              <span class="col-8" >{{item.product.title}}</span>
             </div>
           </td>
           <td class="align-middle" >
-            <span>$ {{item.producto.precio}}</span>
+            <span>$ {{item.product.price}}</span>
           </td>
           <td class="align-middle" >
 
             <input type="number" name="unidades" class="form-control
 
-text-center" [(ngModel)]="item.cantidad" min="0" />
+text-center" [(ngModel)]="item.units" min="0" />
 
           </td>
           <td class="align-middle" >
@@ -41,14 +41,14 @@ text-center" [(ngModel)]="item.cantidad" min="0" />
     </div>
     <div class="mt-5 d-flex justify-content-end" >
       <div class="text-end" >
-        <h4 >Valor a pagar: ${{valorTotal}}</h4>
+        <h4 >Valor a pagar: ${{totalPrice}}</h4>
         <button class="btn btn-primary" ><i class="fa-regular fa-credit-card"></i>
 
           Comprar</button>
       </div>
     </div>
   </form>
-  <div *ngIf="productos.length == 0" class="alert alert-warning d-flex align-items-center"
+  <div *ngIf="products.length == 0" class="alert alert-warning d-flex align-items-center"
        role="alert">
     <i class="fa-solid fa-triangle-exclamation"></i><span class="ms-3">No hay elementos en
 el carrito</span>

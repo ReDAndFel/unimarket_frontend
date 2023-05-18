@@ -1,22 +1,35 @@
 export class ProductGetDTO {
-  constructor(number: number, s: string, juego: string, s2: string, uncharted: string, s3: string, s4: string, s5: string, s6: string, number2: number, number3: number, number4: number, s7: string, photos450225: string) {
-
-  }
-
-
+  
   id:number = 0;
   deadline:Date = new Date();
   title:string = "";
-  puntuation:string = "";
+  puntuation:number = 0;
   description:string = "";
-  unities:string = "";
-  realPrice:string = "";
-  price:string = "";
+  units:number = 0;
+  realPrice:number = 0;
+  price:number = 0;
   idPerson:string = "";
   idCategory:number = 0;
   discount:number = 0;
   stateProduct:number = 0;
   creationDate:Date = new Date();
-  images: string = "";
+  images!: FileList;
+
+  constructor(id: number, deadline: Date, title: string, puntuation: number, description: string, units: number, realPrice: number, price: number, idPerson: string, idCategory: number, discount: number, stateProduct: number, creationDate: Date, images: FileList) {
+    this.id = id;
+    this.deadline = deadline;
+    this.title = title;
+    this.puntuation = puntuation;
+    this.description = description;
+    this.units = units;
+    this.realPrice = realPrice;
+    this.price = price;
+    this.idPerson = idPerson;
+    this.idCategory = idCategory;
+    this.discount = discount;
+    this.stateProduct = stateProduct;
+    this.creationDate = creationDate;
+    this.images = images;
+  }
 
 }

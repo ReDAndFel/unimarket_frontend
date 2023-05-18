@@ -11,19 +11,24 @@ import { TransactionDetailDto } from "../../model/transaction-detail-dto";
 export class CartComponent {
 
   products:TransactionDetailDto[];
-  valorTotal:number;
+  totalPrice:number;
+
   constructor(private cartService:CartService, private productService:ProductService) {
+
     this.products = [];
-    this.valorTotal = 0;
-    this.products = [];
-    this.valorTotal = 0;
-    const codeList = this.cartService.listar();
-    if(codeList.length > 0){
-      for( let cod of codeList ){
-        const product = this.productService.get(cod);
-        if(product!=null){
-          this.products.push(new TransactionDetailDto(product, 1));
-          this.valorTotal += product.;
+    this.totalPrice = 0;
+
+    const idList = this.cartService.listProducts();
+
+    if(idList.length > 0){
+
+      for( let id of idList ){
+
+        const productGetDTO = this.productService.get(id);
+        
+        if(productGetDTO!=null){
+          this.products.push(new TransactionDetailDto(productGetDTO, 1));
+          //this.totalPrice += productGetDTO.price;
         }
       }
     }
