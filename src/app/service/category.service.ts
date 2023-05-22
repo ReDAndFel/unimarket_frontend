@@ -1,19 +1,24 @@
 import { Injectable } from '@angular/core';
 import {CategoryDTO} from "../model/category-dto";
+import { HttpClient } from '@angular/common/http';
+import { MessageDTO } from '../model/message-dto';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  categories:CategoryDTO[];
-  constructor(){
-    this.categories = [];
-    this.categories.push(new CategoryDTO(1, "Ropa", "https://cdn-icons-png.flaticon.com/512/62/62918.png"));
-    this.categories.push(new CategoryDTO(2, "Electronica", "https://cdn-icons-png.flaticon.com/512/6558/6558953.png"));
 
+  private catURL = "http://localhost:8080/api/categorias";  
+
+  constructor(private http: HttpClient){
+    
   }
-  public listar():CategoryDTO[]{
+  public getCategories(): Observable<MessageDTO> {
+    return this.http.get<MessageDTO>(`${this.catURL}/obtener`);
+    }
+  /*public listar():CategoryDTO[]{
     return this.categories;
-  }
+  }*/
 
 }

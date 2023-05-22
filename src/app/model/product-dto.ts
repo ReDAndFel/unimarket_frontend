@@ -1,3 +1,5 @@
+import { ImageDto } from "./image-dto";
+
 export class ProductDTO {
 
   title:string = "";
@@ -6,7 +8,7 @@ export class ProductDTO {
   realPrice:number = 0;
   category:string = "";
   discount:number = 0;
-  images!: FileList;
+  images!: ImageDto[];
 
 
 }

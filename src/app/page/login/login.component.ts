@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
-import {LoginDTO} from "../../model/login-dto";
+import { LoginDTO } from "../../model/login-dto";
 import { Router } from "@angular/router";
+import { AuthService } from 'src/app/service/auth.service';
+import { TokenService } from 'src/app/service/token.service';
+import { Alert } from 'src/app/model/alert';
+import { SessionDTO } from 'src/app/model/session-dto';
 
 @Component({
   selector: 'app-login',
@@ -8,13 +12,23 @@ import { Router } from "@angular/router";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  login:LoginDTO;
-  constructor(public router:Router){
-    this.login = new LoginDTO();
+  loginPerson: SessionDTO;
+  alert!:Alert;
+
+  constructor(public router: Router, public authService: AuthService, public tokenService : TokenService) {
+    this.loginPerson = new LoginDTO();
   }
-  public signIn(){
-    console.log(this.login);
-    this.router.navigateByUrl("/");
+  public loginAction() {
+    const object = this;
+    this.authService.login(this.loginPerson).subscribe({
+      next: data => {
+        object.tokenService.login(data.respuesta.token);
+      },
+      error: error => {
+         object.alert = new Alert (error.error.respuesta, "danger");
+      }
+    });
   }
+
 }
 

@@ -1,13 +1,13 @@
 export class CategoryDTO {
   
 
-  id:number = 0;
+  id:string = "";
   name:string = "";
-  image:string = "";
+  url_image:string = "";
 
-  constructor(id: number, name: string, image: string) {
+  constructor(id: string, name: string, url_image: string) {
     this.id = id;
     this.name = name;
-    this.image = image;
+    this.url_image = url_image;
   }
 }

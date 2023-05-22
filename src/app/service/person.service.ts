@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { MessageDTO } from '../model/message-dto';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { PersonDTO } from '../model/person-dto';
 import { PasswordDTO } from '../model/password-dto';
 import { PersonGetDTO } from '../model/person-get-dto';
 

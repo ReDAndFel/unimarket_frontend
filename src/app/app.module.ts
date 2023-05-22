@@ -23,6 +23,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './page/alert/alert.component';
 import { ProductCardComponent } from './page/product-card/product-card.component';
+import { ProfileComponent } from './page/profile/profile.component';
+import { NavUserComponent } from './page/nav-user/nav-user.component';
+import { HeaderComponent } from './page/header/header.component';
 
 
 
@@ -46,7 +49,10 @@ import { ProductCardComponent } from './page/product-card/product-card.component
     BuysComponent,   
     DetailProductComponent,
     AlertComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProfileComponent,
+    NavUserComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

@@ -12,13 +12,20 @@ export class HomeComponent {
 
   textoBusqueda:string;
   filter:string;
-  products:ProductGetDTO[];
+  products!:ProductGetDTO[];
   filtro:ProductGetDTO[]
 
 
   constructor( private router:Router,private route:ActivatedRoute, private productService:ProductService){
 
-    this.products = this.productService.listar();
+    this.productService.listarAllProducts().subscribe({
+      next: data => {
+        this.products = data.respuesta;
+      },
+      error: error => {
+        console.log(error.error);
+      }
+    });
     this.filtro = [];
 
     this.textoBusqueda = "";

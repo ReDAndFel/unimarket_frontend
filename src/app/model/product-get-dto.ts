@@ -1,3 +1,5 @@
+import { ImageDto } from "./image-dto";
+
 export class ProductGetDTO {
 
   id:number = 0;
@@ -13,9 +15,9 @@ export class ProductGetDTO {
   discount:number = 0;
   stateProduct:number = 0;
   creationDate:Date = new Date();
-  images!: FileList;
+  images!: ImageDto[];
 
-  constructor(id: number, deadline: Date, title: string, puntuation: number, description: string, units: number, realPrice: number, price: number, idPerson: string, category: string, discount: number, stateProduct: number, creationDate: Date) {
+  constructor(id: number, deadline: Date, title: string, puntuation: number, description: string, units: number, realPrice: number, price: number, idPerson: string, category: string, discount: number, stateProduct: number, creationDate: Date, images: ImageDto[]) {
     this.id = id;
     this.deadline = deadline;
     this.title = title;
@@ -29,6 +31,7 @@ export class ProductGetDTO {
     this.discount = discount;
     this.stateProduct = stateProduct;
     this.creationDate = creationDate;
+    this.images = images;
   }
 
 }

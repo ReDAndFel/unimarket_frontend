@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {CategoryService} from "../../service/category.service";
-import {CategoryDTO} from "../../model/category-dto";
+import { CategoryService } from "../../service/category.service";
+import { CategoryDTO } from "../../model/category-dto";
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/service/product.service';
 import { ProductGetDTO } from 'src/app/model/product-get-dto';
@@ -11,17 +11,35 @@ import { ProductGetDTO } from 'src/app/model/product-get-dto';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent {
-  categories: CategoryDTO[];
-  products:ProductGetDTO[];
-  filtro:ProductGetDTO[];  
+  categories!: any[];
+  products!: ProductGetDTO[];
+  filtro: ProductGetDTO[];
 
-  constructor(private categoryService: CategoryService,private router: Router, private productService:ProductService) {
-    this.categories = this.categoryService.listar();
-    this.products = this.productService.listar();
+  constructor(private categoryService: CategoryService, private router: Router, private productService: ProductService) {
+
+    //this.categoryService.listar().subscribe((res:CategoryDTO[]) => this.categories = res);
+    this.categoryService.getCategories().subscribe({
+      next: data => {
+        this.categories = data.respuesta;
+      },
+      error: error => {
+        console.log(error.error);
+      }
+    });
+
+    this.productService.listarAllProducts().subscribe({
+      next: data => {
+        this.products = data.respuesta;
+      },
+      error: error => {
+        console.log(error.error);
+      }
+    });
+
     this.filtro = [];
   }
 
-  public selectCategory(category:string){
-    this.router.navigate(["/categoria",category]);        
+  public selectCategory(category: string) {
+    this.router.navigate(["/categoria", category]);
   }
 }

@@ -1,12 +1,19 @@
-
+.main_container {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .category_container{
-  width: 100vw;
+  min-height: 80%;
   padding: 1em;
   display: flex;
   flex-direction: column;
   gap: 2em;
   justify-content: center;
   align-items: center;
+  overflow-y: scroll;
 
 }
 

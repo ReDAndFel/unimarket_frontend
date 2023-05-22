@@ -16,6 +16,7 @@ import {CategoryComponent} from "./page/category/category.component";
 import {ManagementProductsComponent} from "./page/management-products/management-products.component";
 import {BuysComponent} from "./page/buys/buys.component";
 import { DetailProductComponent } from './page/detail-product/detail-product.component';
+import { ProfileComponent } from './page/profile/profile.component';
 
 
 
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: "metodo_de_pago/:id", component: PaymentMethodInfoComponent },
   { path: "metodos_de_pago", component: PaymentMethodComponent},
   { path: "crear_producto", component: ProductComponent },
+  //{ path: "editarP", component: ProductComponent },
   { path: "editar_producto/:id", component: ProductComponent },
   { path: "cuenta", component: AccountComponent },
   { path: "carrito", component: CartComponent },
@@ -40,6 +42,9 @@ const routes: Routes = [
   { path: "gestion_productos", component: ManagementProductsComponent },
   { path: "compras", component: BuysComponent },  
   { path: "producto/:id", component: DetailProductComponent },
+ // { path: "detail", component: DetailProductComponent },
+  { path: "profile", component: ProfileComponent },
+  
   
   { path: "**", pathMatch: "full", redirectTo: "" }
 ];

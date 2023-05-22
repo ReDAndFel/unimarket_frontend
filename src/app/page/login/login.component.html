@@ -1,29 +1,30 @@
-<body>
-
-<main class="form-signin w-100 h-100">
-  <form #f="ngForm" class="p-5" (ngSubmit)="signIn()">
+<app-header></app-header>
+<div class="form-signin">
+  <form #f="ngForm" class="p-5" (ngSubmit)="loginAction()">
 
     <h1 class="h3 mb-4 fw-bold">Iniciar Sesion</h1>
 
     <div class="form-floating mb-4 ">
-      <input type="email"  name="email" class="form-control " id="floatingInput" placeholder="name@example.com" [(ngModel)]="login.email"email maxlength="100" required>
+      <input type="email" name="email" class="form-control " id="floatingInput" placeholder="name@example.com"
+        [(ngModel)]="loginPerson.email" email maxlength="100" required>
       <label for="floatingInput">Email</label>
     </div>
     <div class="form-floating  mb-4 ">
-      <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" [(ngModel)]="login.password" required>
+      <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password"
+        [(ngModel)]="loginPerson.password" required>
       <label for="floatingPassword">Password</label>
     </div>
-
-    <button class="w-100 btn btn-lg"  type="submit" [disabled]="f.invalid">INICIAR SESION</button>
-
+    <button class="w-100 btn btn-lg" type="submit" [disabled]="f.invalid">INICIAR SESION</button>
+    <app-alert></app-alert>
     <div class="forget_password">
-     <p>¿Olvidaste tu contraseña?<span><a href="/olvide_mi_contraseña">Reestablecer contraseña</a></span></p>
+      <p>¿Olvidaste tu contraseña?<span><a routerLink="/olvide_mi_contraseña">Reestablecer contraseña</a></span></p>
+    </div>
+
+    <div class="signup_container">
+      <p>¿No estás registrado?<span><a routerLink="/signup">Registrate</a></span></p>
     </div>
 
   </form>
-</main>
-</body>
 
 
-
-
+</div>

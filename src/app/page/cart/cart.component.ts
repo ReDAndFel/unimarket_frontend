@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CartService } from "../../service/cart.service";
 import { ProductService } from "../../service/product.service";
 import { TransactionDetailDto } from "../../model/transaction-detail-dto";
+import { ProductGetDTO } from 'src/app/model/product-get-dto';
 
 @Component({
   selector: 'app-cart',

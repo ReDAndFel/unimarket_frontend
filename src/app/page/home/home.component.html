@@ -1,12 +1,24 @@
-<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search"
-      (submit)="iraBusqueda(textoBusqueda.value)" >
-  <input #textoBusqueda type="search" class="form-control form-control-dark text-bg-dark"
-         placeholder="Search..." aria-label="Search">
-</form>
+<div class="home_container">
 
-<div id="products_container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-  <div class="col" *ngFor="let product of filtro">
-    <app-product-card [product]="product"></app-product-card>
+  <div class="header_container">
+    <app-header></app-header>
   </div>
-</div>
 
+  <div class="form_search">
+    <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" (submit)="iraBusqueda(textoBusqueda.value)">
+      <input #textoBusqueda type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
+        aria-label="Search">
+    </form>
+  </div>  
+
+  <div id="products_container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="col" *ngFor="let product of filtro">
+      <app-product-card [product]="product"></app-product-card>
+    </div>
+  </div>
+
+  <div class="nav_container">
+    <app-nav-user></app-nav-user>
+  </div>
+  
+</div>

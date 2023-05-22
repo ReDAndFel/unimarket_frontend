@@ -25,7 +25,14 @@ export class ManagementProductsComponent {
   }
 
   ngOnInit(): void {
-    this.products = this.productService.listar();
+    this.productService.listarAllProducts().subscribe({
+      next: data => {
+        this.products = data.respuesta;
+      },
+      error: error => {
+        console.log(error.error);
+      }
+    });
   }
 
   public select(product: ProductGetDTO, state: boolean) {

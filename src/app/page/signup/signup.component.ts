@@ -11,9 +11,10 @@ import { Alert } from 'src/app/model/alert';
 })
 
 export class SignupComponent {
-[x: string]: any;
+
   person:PersonDTO;
   alert!:Alert;
+  
   constructor(private authService:AuthService){
     this.person = new PersonDTO();
   }

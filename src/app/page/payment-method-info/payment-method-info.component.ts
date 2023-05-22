@@ -7,6 +7,7 @@ import {PaymentMethodDTO} from "../../model/payment-method-dto";
   styleUrls: ['./payment-method-info.component.css']
 })
 export class PaymentMethodInfoComponent {
+  
   paymentMethod:PaymentMethodDTO;
   constructor() {
     this.paymentMethod = new PaymentMethodDTO;
