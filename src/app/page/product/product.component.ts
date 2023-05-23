@@ -5,6 +5,8 @@ import { ImageDto } from 'src/app/model/image-dto';
 import { ImageService } from 'src/app/service/image.service';
 import { CategoryService } from 'src/app/service/category.service';
 import { ProductService } from 'src/app/service/product.service';
+import {CategoryDTO} from "../../model/category-dto";
+import {TokenService} from "../../service/token.service";
 
 @Component({
   selector: 'app-product',
@@ -12,12 +14,12 @@ import { ProductService } from 'src/app/service/product.service';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-  categories: string[];
+  categories: CategoryDTO[];
   product: ProductDTO;
-  images!: ImageDto[];
+  images!: any[];
   textButton!: string;
 
-  constructor(private router: Router, private imageService: ImageService, private categoryService: CategoryService, private productService: ProductService) {
+  constructor(private router: Router, private imageService: ImageService, private categoryService: CategoryService, private productService: ProductService, private  tokenService:TokenService) {
     this.categories = [];
     this.product = new ProductDTO();
     if (this.router.url == "/crear_producto") {
@@ -29,10 +31,10 @@ export class ProductComponent {
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe({
       next: data => {
-        this.categories = data.respuesta;
+        this.categories = data.response;
       },
       error: error => {
-        console.log(error.error);
+        console.log(error.error.response);
       }
     });
   }
@@ -46,11 +48,13 @@ export class ProductComponent {
   public subirImagenes() {
     if (this.images != null && this.images.length > 0) {
       const objeto = this.product;
+
       const formData = new FormData();
-      formData.append('file', this.images[0].url);
+      formData.append('file', this.images[0]);
+
       this.imageService.subir(formData).subscribe({
         next: data => {
-          objeto.images.push(data.respuesta.url);
+          objeto.images.push( new ImageDto(data.response.public_id, data.response.url) );
         },
         error: error => {
           console.log(error.error);
@@ -63,9 +67,10 @@ export class ProductComponent {
 
   createProduct() {
     if (this.product.images.length > 0) {
+      //this.product.id_person = this.tokenService.getCedula();
       this.productService.createProduct(this.product).subscribe({
         next: data => {
-          console.log(data.respuesta);
+          console.log(data.response);
         },
         error: error => {
           console.log(error.error);

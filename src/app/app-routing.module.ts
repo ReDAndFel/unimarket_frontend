@@ -23,7 +23,7 @@ import { ProfileComponent } from './page/profile/profile.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: ":filter/:text", component: HomeComponent },
+  { path: "filter/:filter/:text", component: HomeComponent },
   { path: "login", component: LoginComponent },
   { path: "signup", component: SignupComponent },
   { path: "olvide_mi_contraseña", component: ForgetPasswordComponent },
@@ -40,12 +40,12 @@ const routes: Routes = [
   { path: "carrito", component: CartComponent },
   { path: "categoria", component: CategoryComponent },
   { path: "gestion_productos", component: ManagementProductsComponent },
-  { path: "compras", component: BuysComponent },  
+  { path: "compras", component: BuysComponent },
   { path: "producto/:id", component: DetailProductComponent },
  // { path: "detail", component: DetailProductComponent },
   { path: "profile", component: ProfileComponent },
-  
-  
+
+
   { path: "**", pathMatch: "full", redirectTo: "" }
 ];
 @NgModule({

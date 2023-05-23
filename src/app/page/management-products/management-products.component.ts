@@ -27,7 +27,7 @@ export class ManagementProductsComponent {
   ngOnInit(): void {
     this.productService.listarAllProducts().subscribe({
       next: data => {
-        this.products = data.respuesta;
+        this.products = data.response;
       },
       error: error => {
         console.log(error.error);
@@ -66,7 +66,7 @@ export class ManagementProductsComponent {
   }
 
   public updateProduct(id:number) {
-    this.router.navigate(["/editar_producto",id]); 
+    this.router.navigate(["/editar_producto",id]);
   }
   public sendInfo() {
     if(this.btnText == "Actualizar"){

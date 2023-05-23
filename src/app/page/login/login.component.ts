@@ -22,7 +22,7 @@ export class LoginComponent {
     const object = this;
     this.authService.login(this.loginPerson).subscribe({
       next: data => {
-        object.tokenService.login(data.respuesta.token);
+        object.tokenService.login(data.response.token);
       },
       error: error => {
          object.alert = new Alert (error.error.respuesta, "danger");

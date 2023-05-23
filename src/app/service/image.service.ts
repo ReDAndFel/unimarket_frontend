@@ -12,9 +12,9 @@ export class ImageService {
   private imgURL = "http://localhost:8080/api/imagenes";
 
   constructor(private http: HttpClient) { }
-  
-  public subir(imagen: FormData): Observable<MessageDTO> {
-  return this.http.post<MessageDTO>(`${this.imgURL}/subir`, imagen);
+
+  public subir(file: FormData): Observable<MessageDTO> {
+  return this.http.post<MessageDTO>(`${this.imgURL}/subir`, file);
   }
   public eliminar(id: string): Observable<MessageDTO> {
   return this.http.delete<MessageDTO>(`${this.imgURL}/eliminar/${id}`);

@@ -20,7 +20,7 @@ export class CategoryComponent {
     //this.categoryService.listar().subscribe((res:CategoryDTO[]) => this.categories = res);
     this.categoryService.getCategories().subscribe({
       next: data => {
-        this.categories = data.respuesta;
+        this.categories = data.response;
       },
       error: error => {
         console.log(error.error);
@@ -29,7 +29,7 @@ export class CategoryComponent {
 
     this.productService.listarAllProducts().subscribe({
       next: data => {
-        this.products = data.respuesta;
+        this.products = data.response;
       },
       error: error => {
         console.log(error.error);

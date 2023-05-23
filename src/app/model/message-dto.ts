@@ -1,7 +1,7 @@
 export class MessageDTO {
 
-    estado!:number;
+    status!:number;
     error!:boolean;
-    respuesta:any;
+    response:any;
 
 }

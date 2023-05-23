@@ -44,4 +44,8 @@ export class TokenService {
     return values;
   }
 
+  public getCedula(){
+    //PROGRAMAR
+  }
+
 }

@@ -1,10 +1,10 @@
 export class ImageDto {
 
-    publicId:string = "";
+    id:string = "";
     url:string = "";
 
     constructor(publicId: string,url:string){
-        this.publicId = publicId;
+        this.id = publicId;
         this.url = url;
     }
 

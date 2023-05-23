@@ -14,19 +14,19 @@ export class SignupComponent {
 
   person:PersonDTO;
   alert!:Alert;
-  
+
   constructor(private authService:AuthService){
     this.person = new PersonDTO();
   }
-  
+
   public register(){
     const object = this;
     this.authService.registrar(this.person).subscribe({
       next: data => {
-        object.alert = new Alert(data.respuesta, "success");
+        object.alert = new Alert(data.response, "success");
       },
       error: error => {
-        object.alert = new Alert(error.error.respuesta, "danger");
+        object.alert = new Alert(error.error.response, "danger");
       }
       });
   }

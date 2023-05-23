@@ -9,11 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./detail-product.component.css']
 })
 export class DetailProductComponent {
-  cartService:CartService;
   id!:string;
 
-  constructor(private router: Router, private route:ActivatedRoute) {
-    this.cartService = new CartService();
+  constructor(private router: Router, private route:ActivatedRoute, private cartService:CartService) {
     this.route.params.subscribe(params => {this.id = params["id"]})
   }
 

@@ -18,15 +18,17 @@ export class HomeComponent {
 
   constructor( private router:Router,private route:ActivatedRoute, private productService:ProductService){
 
+    this.filtro = [];
+
     this.productService.listarAllProducts().subscribe({
       next: data => {
-        this.products = data.respuesta;
+        this.products = data.response;
+        this.filtro = this.products;
       },
       error: error => {
         console.log(error.error);
       }
     });
-    this.filtro = [];
 
     this.textoBusqueda = "";
     this.filter = "";
@@ -43,7 +45,7 @@ export class HomeComponent {
           this.filtro = this.products.filter(p =>
             p.title.toLowerCase().includes(this.textoBusqueda.toLowerCase())
           );
-        }        
+        }
       }else{
         this.filtro = this.products;
       }
