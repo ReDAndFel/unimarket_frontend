@@ -32,8 +32,8 @@ const routes: Routes = [
   { path: "restore_password", component: RestorePasswordComponent },
   { path: "change_password", component: ChangePasswordComponent },
   { path: "añadir_metodo_de_pago", component: PaymentMethodInfoComponent },
-  { path: "metodo_de_pago/:id", component: PaymentMethodInfoComponent },
-  { path: "metodos_de_pago", component: PaymentMethodComponent},
+  { path: "metodo_de_pago/:idPaymentMethod", component: PaymentMethodInfoComponent },
+  { path: "metodos_de_pago/:idPerson", component: PaymentMethodComponent},
   { path: "crear_producto", component: ProductComponent },
   //{ path: "editarP", component: ProductComponent },
   { path: "editar_producto/:id", component: ProductComponent },
@@ -44,7 +44,7 @@ const routes: Routes = [
   { path: "compras", component: BuysComponent },
   { path: "producto/:id", component: DetailProductComponent },
  // { path: "detail", component: DetailProductComponent },
-  { path: "perfil", component: ProfileComponent },  
+  { path: "perfil", component: ProfileComponent },
 
 
   { path: "**", pathMatch: "full", redirectTo: "" }

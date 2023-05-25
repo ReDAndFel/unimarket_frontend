@@ -36,13 +36,13 @@
           <button type="submit" [disabled]="images == null" class="btn btn-primary" (click)="subirImagenes()">
             <i class="fa-solid fa-cloud-arrow-up me-2"></i>Subir imágenes
           </button>
-        </div>         
-        
+        </div>
+
         <div class="textfield cbCategory">
           <label>Categoría: </label>
-          <select name="category" [(ngModel)]="product.category" required>
+          <select name="category" [(ngModel)]="product.idCategory" required>
             <option value="" selected>Seleccione una categoría</option>
-            <option [value]="i+1" *ngFor="let item of categories; index as i"> {{item.name}} </option>
+            <option [value]="item.id" *ngFor="let item of categories; index as i"> {{item.name}} </option>
           </select>
         </div>
         <button class="button_form" (click)="createProduct()" type="submit"

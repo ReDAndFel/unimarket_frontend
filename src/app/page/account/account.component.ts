@@ -9,20 +9,16 @@ import { TokenService } from 'src/app/service/token.service';
 })
 export class AccountComponent {
   isLogged = false;
-  isMod = false;  
+  isMod = false;
   idPerson: string = "";
   name:string = "";
   roles!: string[];
 
-  constructor(private tokenService: TokenService, private sessionService : SessionService) { }
-  ngOnInit(): void {
+  constructor(private tokenService: TokenService, private sessionService : SessionService) {
+
+  }
+ /* ngOnInit(): void {
     const objeto = this;
-    this.sessionService.currentMessage.subscribe({
-      next: data => {
-        objeto.actualizarSesion(data);
-      }
-    });
-    this.actualizarSesion(this.tokenService.isLogged());
   }
 
   private actualizarSesion(estado: boolean) {
@@ -37,8 +33,8 @@ export class AccountComponent {
         this.isMod = true;
       }
     }
-  }
- /* ngOnInit(): void {
+  }*/
+  ngOnInit(): void {
     this.isLogged = this.tokenService.isLogged();
     if (this.isLogged) {
       this.idPerson = this.tokenService.getId();
@@ -48,7 +44,7 @@ export class AccountComponent {
     if(this.roles[0] == "MODERADOR"){
       this.isMod = true;
     }
-  }*/
+  }
   public logout() {
     this.tokenService.logout();
   }

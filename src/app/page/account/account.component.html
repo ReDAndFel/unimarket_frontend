@@ -4,12 +4,12 @@
 </ng-template>
 
 <ng-template #logged>
-  <div *ngIf="!isMod; then user else mod"></div>  
+  <div *ngIf="!isMod; then user else mod"></div>
   <ng-template #mod>
     <div class="main_container">
       <app-header></app-header>
       <div class="account_container_admin">
-  
+
         <div class="profile_container">
           <div class="profile_item_container">
             <div class="profile_item">
@@ -18,20 +18,20 @@
             </div>
           </div>
         </div>
-  
-        
+
+
         <button type="button" (click)="logout()" class="btn btn-warning">Logout</button>
       </div>
-      
+
       <app-nav-admin></app-nav-admin>
-    </div> 
+    </div>
 
   </ng-template>
   <ng-template #user>
     <div class="main_container">
       <app-header></app-header>
       <div class="account_container">
-  
+
         <div class="profile_container">
           <div class="profile_item_container">
             <div class="profile_item">
@@ -40,7 +40,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="transaction_container">
           <h2>Mis transacciones y productos</h2>
           <div class="transaction_item_container">
@@ -54,15 +54,15 @@
             </div>
           </div>
         </div>
-  
+
         <div class="payment_method_container">
           <h2>Mis metodos de pago</h2>
           <div class="payment_method_item">
-            <a routerLink="/metodos_de_pago"><i class="fa-regular fa-credit-card" style="color: #ffffff;"></i></a>
+            <a routerLink="/metodos_de_pago/{{idPerson}}"><i class="fa-regular fa-credit-card" style="color: #ffffff;"></i></a>
             <h3>Tarjetas</h3>
           </div>
         </div>
-  
+
         <div class="favorite_products_container">
           <h2>Mis productos favoritos</h2>
           <div class="favorite_product_list">
@@ -74,11 +74,11 @@
         </div>
         <button type="button" (click)="logout()" class="btn btn-warning">Logout</button>
       </div>
-      
+
       <app-nav-user></app-nav-user>
-    </div>  
+    </div>
   </ng-template>
-  
+
 
 
 

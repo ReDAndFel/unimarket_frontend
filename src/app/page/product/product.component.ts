@@ -25,8 +25,8 @@ export class ProductComponent {
   constructor(private sessionService : SessionService,private router: Router, private imageService: ImageService,private tokenService: TokenService, private categoryService: CategoryService, private productService: ProductService) {
     this.product = new ProductDTO();
   }
-  ngOnInit(): void {
-    
+  /*ngOnInit(): void {
+
     const objeto = this;
     this.sessionService.currentMessage.subscribe({
       next: data => {
@@ -39,7 +39,7 @@ export class ProductComponent {
   private actualizarSesion(estado: boolean) {
     this.isLogged = estado;
     if (estado) {
-      this.idPerson = this.tokenService.getId();    
+      this.idPerson = this.tokenService.getId();
 
       this.categoryService.getCategories().subscribe({
         next: data => {
@@ -48,26 +48,25 @@ export class ProductComponent {
         error: error => {
           console.log(error.error.response);
         }
-      });  
+      });
     }
-  }
-  /*ngOnInit(): void {
+  }*/
+  ngOnInit(): void {
     this.isLogged = this.tokenService.isLogged();
     if (this.isLogged) {
-      this.idPerson = this.tokenService.getId();    
+      this.idPerson = this.tokenService.getId();
 
       this.categoryService.getCategories().subscribe({
         next: data => {
-          
+
           this.categories = data.response;
-          console.log(this.categories);
         },
         error: error => {
           console.log(error.error.response);
         }
-      });  
-    }     
-  }*/
+      });
+    }
+  }
 
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
@@ -77,7 +76,7 @@ export class ProductComponent {
 
   public subirImagenes() {
     if (this.images != null && this.images.length > 0) {
-      
+
       const formData = new FormData();
       formData.append('file', this.images[0]);
 

@@ -18,7 +18,7 @@ export class ProfileComponent {
   constructor(private sessionService:SessionService,private tokenService:TokenService) {
     this.person = new PersonDTO();
   }
-  ngOnInit(): void {
+ /* ngOnInit(): void {
     const objeto = this;
     this.sessionService.currentMessage.subscribe({
       next: data => {
@@ -26,21 +26,28 @@ export class ProfileComponent {
       }
     });
     this.actualizarSesion(this.tokenService.isLogged());
+
+    /*this.personService.get(this.idPerson).suscribe({
+      next: data => {
+        this.person = data.response;
+      }
+    })
+
   }
 
   private actualizarSesion(estado: boolean) {
     this.isLogged = estado;
     if (estado) {
-      this.idPerson = this.tokenService.getId();     
+      this.idPerson = this.tokenService.getId();
     }
-  }
+  }*/
 
-  /*ngOnInit(): void {
+  ngOnInit(): void {
     this.isLogged = this.tokenService.isLogged();
     if (this.isLogged) {
-      this.idPerson = this.tokenService.getId();      
-    }    
-  }*/
+      this.idPerson = this.tokenService.getId();
+    }
+  }
 
   public updatePerson(){
     console.log(this.person);

@@ -11,17 +11,32 @@ import { TokenService } from 'src/app/service/token.service';
   styleUrls: ['./payment-method.component.css']
 })
 export class PaymentMethodComponent {
- 
+
   paymentMethods!:PaymentMethodGetDto[];
   idPaymentMethod!:number;
   isLogged: boolean = false;
   idPerson!:string;
 
   constructor(private router: Router, private paymentMethodService:PaymentMethodService, private sessionService : SessionService, private tokenService : TokenService){
-    
+
   }
-  
   ngOnInit(): void {
+    this.isLogged = this.tokenService.isLogged();
+    if (this.isLogged) {
+      this.idPerson = this.tokenService.getId()
+       console.log(this.idPerson);
+      this.paymentMethodService.listPaymentMethodByPerson(this.idPerson).subscribe({
+        next: data => {
+          this.paymentMethods = data.response;
+        },
+        error: error => {
+          console.log(error.error.response);
+        }
+      });
+    }
+  }
+
+  /*ngOnInit(): void {
     const objeto = this;
     this.sessionService.currentMessage.subscribe({
       next: data => {
@@ -44,17 +59,17 @@ export class PaymentMethodComponent {
         }
       });
     }
-  }
+  }*/
 
   public editPaymentMethod(id:number){
-    this.router.navigate(["/editar_metodo_de_pago",id]);    
+    this.router.navigate(["/editar_metodo_de_pago",id]);
   }
 
   public addPaymentMethod(){
-    this.router.navigate(["/añadir_metodo_de_pago"]);    
+    this.router.navigate(["/añadir_metodo_de_pago"]);
   }
 
-  public deletePaymentMethod(id:number){    
+  public deletePaymentMethod(id:number){
       this.paymentMethodService.deletePaymentMethod(id).subscribe({
         next: data => {
           console.log(data.response);
@@ -64,5 +79,5 @@ export class PaymentMethodComponent {
         }
       });
   }
-  
+
 }

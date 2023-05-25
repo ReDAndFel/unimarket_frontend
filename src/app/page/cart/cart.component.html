@@ -25,7 +25,7 @@
                 <td>
                   <div class="d-flex text-start align-items-center">
                     <div class="col-4 me-3 ms-3">
-                      <img [src]="item.product.images[0]" width="100%" />
+                      <img [src]="item.product.images[0].url" width="100%" />
                     </div>
                     <span class="col-8">{{item.product.title}}</span>
                   </div>
@@ -34,9 +34,9 @@
                   <span>$ {{item.product.price}}</span>
                 </td>
                 <td class="align-middle">
-    
+
                   <input type="number" name="unidades" class="form-control text-center" [(ngModel)]="item.units" min="0" />
-    
+
                 </td>
                 <td class="align-middle">
                   <span>$ {{item.product.unities * item.product.price}}</span>
@@ -60,5 +60,5 @@
     </div>
     <app-nav-user></app-nav-user>
   </div>
-  
+
 </ng-template>

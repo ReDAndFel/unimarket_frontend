@@ -80,7 +80,7 @@ export class TokenService {
   public logout() {
     window.sessionStorage.clear();
     this.sessionService.updateSession(false);
-    this.router.navigate(["/login"]);
+    this.router.navigate([""]);
   }
 
 

@@ -14,7 +14,7 @@ export class ProductGetDTO {
   discount:number = 0;
   stateProduct:number = 0;
   creationDate:Date = new Date();
-  images!: ImageDto[];
+  images: ImageDto[] = [];
   idPerson: string = "";
 
   constructor(id: number, deadline: Date, title: string, puntuation: number, description: string, unities: number, realPrice: number, price: number, idCategory: number, discount: number, stateProduct: number, creationDate: Date, images: ImageDto[], idPerson:string) {

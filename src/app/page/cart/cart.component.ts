@@ -17,7 +17,6 @@ export class CartComponent {
   totalPrice:number;
   isLogged = false;
   idPerson!:string;
-  productGetDTO!: ProductGetDTO;
 
   constructor(private cartService:CartService, private productService:ProductService, private tokenService: TokenService, private sessionService : SessionService) {
 
@@ -32,21 +31,24 @@ export class CartComponent {
 
         this.productService.getProduct(id).subscribe({
           next: data => {
-            this.productGetDTO = data.response;
+            const producto = data.response;
+
+            if(producto!=null){
+              this.products.push(new TransactionDetailDto(producto, 1));
+              this.totalPrice += producto.price;
+            }
+
           },
           error: error => {
             console.log(error.error.response);
           }
         });
-        
-        if(this.productGetDTO!=null){
-          this.products.push(new TransactionDetailDto(this.productGetDTO, 1));
-          this.totalPrice += this.productGetDTO.price;
-        }
+
+
       }
     }
   }
- 
+
   ngOnInit(): void {
     const objeto = this;
     this.sessionService.currentMessage.subscribe({
@@ -60,10 +62,10 @@ export class CartComponent {
   private actualizarSesion(estado: boolean) {
     this.isLogged = estado;
     if (estado) {
-      this.idPerson = this.tokenService.getId()     
+      this.idPerson = this.tokenService.getId()
     }
   }
   /*ngOnInit(): void {
-    this.isLogged = this.tokenService.isLogged();    
+    this.isLogged = this.tokenService.isLogged();
     }*/
 }

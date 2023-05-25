@@ -6,13 +6,13 @@ export class ProductDTO {
   description:string = "";
   unities:number = 0;
   realPrice:number = 0;
-  category:string = "";
+  idCategory:number = 0;
   discount:number = 0;
-  images!: ImageDto[];
+  images: ImageDto[] = [];
   idPerson: string = "";
 
   constructor(){
-    
+
   }
 
 
