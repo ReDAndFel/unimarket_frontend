@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaymentMethodGetDto } from 'src/app/model/payment-method-get-dto';
 import { PaymentMethodService } from 'src/app/service/payment-method.service';
+import { SessionService } from 'src/app/service/session.service';
+import { TokenService } from 'src/app/service/token.service';
 
 @Component({
   selector: 'app-payment-method',
@@ -10,13 +12,38 @@ import { PaymentMethodService } from 'src/app/service/payment-method.service';
 })
 export class PaymentMethodComponent {
  
-  paymentMethods:PaymentMethodGetDto[];
+  paymentMethods!:PaymentMethodGetDto[];
   idPaymentMethod!:number;
+  isLogged: boolean = false;
+  idPerson!:string;
 
-  constructor(private router: Router, private paymentMethodService:PaymentMethodService){
-    this.paymentMethodService = new PaymentMethodService();
-    this.paymentMethods = this.paymentMethodService.listar();
+  constructor(private router: Router, private paymentMethodService:PaymentMethodService, private sessionService : SessionService, private tokenService : TokenService){
+    
+  }
+  
+  ngOnInit(): void {
+    const objeto = this;
+    this.sessionService.currentMessage.subscribe({
+      next: data => {
+        objeto.actualizarSesion(data);
+      }
+    });
+    this.actualizarSesion(this.tokenService.isLogged());
+  }
 
+  private actualizarSesion(estado: boolean) {
+    this.isLogged = estado;
+    if (estado) {
+      this.idPerson = this.tokenService.getId();
+      this.paymentMethodService.listPaymentMethodByPerson(this.idPerson).subscribe({
+        next: data => {
+          this.paymentMethods = data.response;
+        },
+        error: error => {
+          console.log(error.error);
+        }
+      });
+    }
   }
 
   public editPaymentMethod(id:number){
@@ -27,15 +54,15 @@ export class PaymentMethodComponent {
     this.router.navigate(["/añadir_metodo_de_pago"]);    
   }
 
-  public deletePaymentMethod(id:number){
-    this.paymentMethods.forEach(e => {
-      if(e.id == id){
-        this.paymentMethods = this.paymentMethods.filter(i => i != e);
-      }
-      
-    });
-    
-    console.log()
+  public deletePaymentMethod(id:number){    
+      this.paymentMethodService.deletePaymentMethod(id).subscribe({
+        next: data => {
+          console.log(data.response);
+        },
+        error: error => {
+          console.log(error.error);
+        }
+      });
   }
   
 }

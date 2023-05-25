@@ -7,12 +7,12 @@
 }
 .category_container{
   min-height: 80%;
-  padding: 1em;
+  padding: 4em;
   display: flex;
-  flex-direction: column;
   gap: 2em;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   overflow-y: scroll;
 
 }
@@ -20,6 +20,7 @@
 .category_card_container{
  border-radius: 100%;
  background-color: #363636;
+ color: #ffff;
  padding: 2em;
  min-width: 17em;
  min-height: 17em;

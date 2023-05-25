@@ -13,11 +13,10 @@ import { ProductGetDTO } from 'src/app/model/product-get-dto';
 export class CategoryComponent {
   categories!: any[];
   products!: ProductGetDTO[];
-  filtro: ProductGetDTO[];
+  
 
   constructor(private categoryService: CategoryService, private router: Router, private productService: ProductService) {
 
-    //this.categoryService.listar().subscribe((res:CategoryDTO[]) => this.categories = res);
     this.categoryService.getCategories().subscribe({
       next: data => {
         this.categories = data.response;
@@ -27,19 +26,10 @@ export class CategoryComponent {
       }
     });
 
-    this.productService.listarAllProducts().subscribe({
-      next: data => {
-        this.products = data.response;
-      },
-      error: error => {
-        console.log(error.error);
-      }
-    });
-
-    this.filtro = [];
+   
   }
 
-  public selectCategory(category: string) {
-    this.router.navigate(["/categoria", category]);
+  public selectCategory(category: number) {
+    this.router.navigate(["busqueda/categoria", category]);
   }
 }

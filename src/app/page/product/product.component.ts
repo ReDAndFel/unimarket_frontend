@@ -7,6 +7,7 @@ import { CategoryService } from 'src/app/service/category.service';
 import { ProductService } from 'src/app/service/product.service';
 import {CategoryDTO} from "../../model/category-dto";
 import {TokenService} from "../../service/token.service";
+import { SessionService } from 'src/app/service/session.service';
 
 @Component({
   selector: 'app-product',
@@ -14,30 +15,59 @@ import {TokenService} from "../../service/token.service";
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-  categories: CategoryDTO[];
-  product: ProductDTO;
+  categories!: CategoryDTO[];
+  product!: ProductDTO;
   images!: any[];
   textButton!: string;
+  isLogged: boolean = false;
+  idPerson!:string;
 
-  constructor(private router: Router, private imageService: ImageService, private categoryService: CategoryService, private productService: ProductService, private  tokenService:TokenService) {
-    this.categories = [];
+  constructor(private sessionService : SessionService,private router: Router, private imageService: ImageService,private tokenService: TokenService, private categoryService: CategoryService, private productService: ProductService) {
     this.product = new ProductDTO();
-    if (this.router.url == "/crear_producto") {
-      this.textButton = "Publicar producto"
-    } else {
-      this.textButton = "Guardar cambios"
-    }
   }
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe({
+    
+    const objeto = this;
+    this.sessionService.currentMessage.subscribe({
       next: data => {
-        this.categories = data.response;
-      },
-      error: error => {
-        console.log(error.error.response);
+        objeto.actualizarSesion(data);
       }
     });
+    this.actualizarSesion(this.tokenService.isLogged());
   }
+
+  private actualizarSesion(estado: boolean) {
+    this.isLogged = estado;
+    if (estado) {
+      this.idPerson = this.tokenService.getId();    
+
+      this.categoryService.getCategories().subscribe({
+        next: data => {
+          this.categories = data.response;
+        },
+        error: error => {
+          console.log(error.error.response);
+        }
+      });  
+    }
+  }
+  /*ngOnInit(): void {
+    this.isLogged = this.tokenService.isLogged();
+    if (this.isLogged) {
+      this.idPerson = this.tokenService.getId();    
+
+      this.categoryService.getCategories().subscribe({
+        next: data => {
+          
+          this.categories = data.response;
+          console.log(this.categories);
+        },
+        error: error => {
+          console.log(error.error.response);
+        }
+      });  
+    }     
+  }*/
 
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
@@ -47,14 +77,13 @@ export class ProductComponent {
 
   public subirImagenes() {
     if (this.images != null && this.images.length > 0) {
-      const objeto = this.product;
-
+      
       const formData = new FormData();
       formData.append('file', this.images[0]);
 
       this.imageService.subir(formData).subscribe({
         next: data => {
-          objeto.images.push( new ImageDto(data.response.public_id, data.response.url) );
+          this.product.images.push( new ImageDto(data.response.public_id, data.response.url) );
         },
         error: error => {
           console.log(error.error);
@@ -67,7 +96,7 @@ export class ProductComponent {
 
   createProduct() {
     if (this.product.images.length > 0) {
-      //this.product.id_person = this.tokenService.getCedula();
+      this.product.idPerson = this.idPerson;
       this.productService.createProduct(this.product).subscribe({
         next: data => {
           console.log(data.response);

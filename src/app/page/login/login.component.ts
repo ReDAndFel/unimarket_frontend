@@ -16,7 +16,7 @@ export class LoginComponent {
   alert!:Alert;
 
   constructor(public router: Router, public authService: AuthService, public tokenService : TokenService) {
-    this.loginPerson = new LoginDTO();
+    this.loginPerson = new SessionDTO();
   }
   public loginAction() {
     const object = this;
@@ -25,7 +25,7 @@ export class LoginComponent {
         object.tokenService.login(data.response.token);
       },
       error: error => {
-         object.alert = new Alert (error.error.respuesta, "danger");
+         object.alert = new Alert (error.error.response, "danger");
       }
     });
   }

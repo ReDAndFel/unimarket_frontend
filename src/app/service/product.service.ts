@@ -36,9 +36,9 @@ export class ProductService {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_favoritos_persona/${idPerson}`);
   }
 
-  public listProductByPrice(maxPrice: string, minPrice: string): Observable<MessageDTO> {
+  public listProductByPrice(maxPrice: number, minPrice: number): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_productos_precio/${minPrice}/${maxPrice}`);
-  }
+  }  
 
   public listProductByTitle(title: string): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_productos_titulo/${title}`);
@@ -65,12 +65,10 @@ export class ProductService {
     return this.http.delete<MessageDTO>(`${this.userUrl}/eliminar/${id}`);
   }
 
-  public get(idProduct: number) {
+ /* public get(idProduct: number) {
     this.products.forEach((product) => {
-      /*if (product.id == idProduct) {
-        return product;
-      }*/
+      
     });
-  }
+  }*/
 
 }

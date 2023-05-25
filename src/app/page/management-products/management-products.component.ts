@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import {ProductService} from "../../service/product.service";
 import {ProductGetDTO} from "../../model/product-get-dto";
 import { Router } from '@angular/router';
+import { CategoryService } from 'src/app/service/category.service';
+import { TokenService } from 'src/app/service/token.service';
+import { CategoryDTO } from 'src/app/model/category-dto';
+import { SessionService } from 'src/app/service/session.service';
 
 @Component({
   selector: 'app-management-products',
@@ -15,17 +19,49 @@ export class ManagementProductsComponent {
   textBtnDelete: string;
   btnText:string;
   iconText:string;
+  categoryName!:string;
+  isLogged = false;
+  idPerson!:string;
 
-  constructor(private productService: ProductService,private router: Router) {
+  constructor(private productService: ProductService,private tokenService: TokenService,private router: Router,private categoryService: CategoryService, private sessionService : SessionService) {
     this.products = [];
     this.selectedList = [];
     this.textBtnDelete = "";
     this.btnText = "";
     this.iconText = "";
+    
+  }
+  ngOnInit(): void {
+    const objeto = this;
+    this.sessionService.currentMessage.subscribe({
+      next: data => {
+        objeto.actualizarSesion(data);
+      }
+    });
+    this.actualizarSesion(this.tokenService.isLogged());
   }
 
-  ngOnInit(): void {
-    this.productService.listarAllProducts().subscribe({
+  private actualizarSesion(estado: boolean) {
+    this.isLogged = estado;
+    if (estado) {
+      this.idPerson = this.tokenService.getId();
+      this.productService.listProductByPerson(this.idPerson).subscribe({
+        next: data => {
+          this.products = data.response;
+        },
+        error: error => {
+          console.log(error.error);
+        }
+      });
+    }
+  }
+
+ /* ngOnInit(): void {
+    this.isLogged = this.tokenService.isLogged();
+    if(this.isLogged){
+      this.idPerson = this.tokenService.getId();
+    }
+    this.productService.listProductByPerson(this.idPerson).subscribe({
       next: data => {
         this.products = data.response;
       },
@@ -33,6 +69,19 @@ export class ManagementProductsComponent {
         console.log(error.error);
       }
     });
+  }*/
+
+  public getCategory(idCategory:number){
+     let category:CategoryDTO;
+
+    this.categoryService.getCategory(idCategory).subscribe({
+      next: data => {
+        category = data.response;
+      },
+      error: error => {
+        console.log(error.error.response);
+      }
+    });  
   }
 
   public select(product: ProductGetDTO, state: boolean) {
@@ -77,7 +126,6 @@ export class ManagementProductsComponent {
     }
     document.getElementById("cerrar-m")?.click();
   }
-
 
 
 }

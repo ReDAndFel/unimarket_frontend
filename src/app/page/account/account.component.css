@@ -6,7 +6,17 @@
   flex-direction: column;
   justify-content:center;
 }
+
 .account_container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 3em;
+  overflow-y:scroll ;
+  color: #ffff;
+}
+.account_container_admin{
+  min-height: 80%;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -57,7 +67,7 @@
   align-items: center;
 }
 .transaction_item h3 ,.payment_method_item h3{
-  font-size: 3em;
+  font-size: 2.5em;
 }
 .transaction_item i, .payment_method_item i {
   font-size: 5em;

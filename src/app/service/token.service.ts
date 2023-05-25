@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Buffer } from "buffer";
+import { SessionService } from './session.service';
 
 const TOKEN_KEY = "AuthToken";
 
@@ -9,7 +10,7 @@ const TOKEN_KEY = "AuthToken";
 })
 export class TokenService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private sessionService : SessionService) { }
 
   public setToken(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
@@ -29,13 +30,9 @@ export class TokenService {
 
   public login(token:string){
     this.setToken(token);
+    this.sessionService.updateSession(true);
     this.router.navigate(["/"]);
-  }
-
-  public logout() {
-    window.sessionStorage.clear();
-    this.router.navigate(["/login"]);
-  }
+    }
 
   private decodePayload(token: string): any {
     const payload = token!.split(".")[1];
@@ -44,8 +41,47 @@ export class TokenService {
     return values;
   }
 
-  public getCedula(){
-    //PROGRAMAR
+  public getId() {
+    const token = this.getToken();
+    if (token) {
+      const values = this.decodePayload(token);
+      return values.id;
+    }
+    return "";
   }
+
+  public getEmail(): string {
+    const token = this.getToken();
+    if (token) {
+      const values = this.decodePayload(token);
+      return values.sub;
+    }
+    return "";
+  }
+
+  public getName(): string {
+    const token = this.getToken();
+    if (token) {
+      const values = this.decodePayload(token);
+      return values.name;
+    }
+    return "";
+  }
+
+  public getRol(): string[] {
+    const token = this.getToken();
+    if (token) {
+      const values = this.decodePayload(token);
+      return values.roles;
+    }
+    return [];
+  }
+
+  public logout() {
+    window.sessionStorage.clear();
+    this.sessionService.updateSession(false);
+    this.router.navigate(["/login"]);
+  }
+
 
 }

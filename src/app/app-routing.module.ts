@@ -5,7 +5,6 @@ import { HomeComponent } from './page/home/home.component';
 import { LoginComponent } from './page/login/login.component';
 import { SignupComponent } from './page/signup/signup.component';
 import {RestorePasswordComponent} from "./page/restore-password/restore-password.component";
-import {InfoPersonComponent} from "./page/info-person/info-person.component";
 import {PaymentMethodInfoComponent} from "./page/payment-method-info/payment-method-info.component";
 import {PaymentMethodComponent} from "./page/payment-method/payment-method.component";
 import {ChangePasswordComponent} from "./page/change-password/change-password.component";
@@ -17,19 +16,21 @@ import {ManagementProductsComponent} from "./page/management-products/management
 import {BuysComponent} from "./page/buys/buys.component";
 import { DetailProductComponent } from './page/detail-product/detail-product.component';
 import { ProfileComponent } from './page/profile/profile.component';
+import { LoginGuard } from './guards/permission.service';
+
 
 
 
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "filter/:filter/:text", component: HomeComponent },
-  { path: "login", component: LoginComponent },
-  { path: "signup", component: SignupComponent },
+  { path: "busqueda/:filter/:text", component: HomeComponent },
+  { path: "busqueda/:filter/:minPrice/:maxPrice", component: HomeComponent },
+  { path: "login", component: LoginComponent , canActivate: [LoginGuard]},
+  { path: "signup", component: SignupComponent ,canActivate: [LoginGuard]},
   { path: "olvide_mi_contraseña", component: ForgetPasswordComponent },
   { path: "restore_password", component: RestorePasswordComponent },
   { path: "change_password", component: ChangePasswordComponent },
-  { path: "info_person", component: InfoPersonComponent },
   { path: "añadir_metodo_de_pago", component: PaymentMethodInfoComponent },
   { path: "metodo_de_pago/:id", component: PaymentMethodInfoComponent },
   { path: "metodos_de_pago", component: PaymentMethodComponent},
@@ -43,7 +44,7 @@ const routes: Routes = [
   { path: "compras", component: BuysComponent },
   { path: "producto/:id", component: DetailProductComponent },
  // { path: "detail", component: DetailProductComponent },
-  { path: "profile", component: ProfileComponent },
+  { path: "perfil", component: ProfileComponent },  
 
 
   { path: "**", pathMatch: "full", redirectTo: "" }

@@ -1,20 +1,14 @@
-<div class="card_item">
-    <div class="image_item" >
-      <img src="{{product.images[0].url}}" alt="img_{{product.title}}">
-    </div>
-    <div class="card_body">
-      <p class="card_text">{{product.title}}</p>
-      <p class="card_text">{{product.description}}</p>
-      <p class="card_text">$ {{product.price}}</p>
-      <span class="badge me-2">{{product.category}}</span>
-      <hr/>
-      <div class="d-flex justify-content-between align-items-center mt-3">
-        <div class="btn-group">
-          <a class="btn btn-sm btn-outline-primary" 
-            routerLink="/producto/{{product.id}}" role="button" >Ver detalle
-          </a>
-        </div>
-      </div>
-    </div>
+<div class="card_item" (click)="detailProduct(product.id)">
+  <div class="image_item">
+    <img src="{{product.images[0].url}}" alt="img_{{product.title}}">
   </div>
-  
+  <div class="card_body">
+
+    <p>{{product.title}}</p>
+    <p>Puntuacion: {{product.puntuation}}</p>
+    <p>$ {{product.price}}</p>
+    <span class="badge">{{categoryName}}</span>
+
+  </div>
+
+</div>

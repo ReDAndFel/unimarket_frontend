@@ -8,7 +8,6 @@ import { LoginComponent } from './page/login/login.component';
 import { SignupComponent } from './page/signup/signup.component';
 import { ForgetPasswordComponent } from './page/forget-password/forget-password.component';
 import { RestorePasswordComponent } from './page/restore-password/restore-password.component';
-import { InfoPersonComponent } from './page/info-person/info-person.component';
 import { PaymentMethodInfoComponent } from './page/payment-method-info/payment-method-info.component';
 import { ChangePasswordComponent } from './page/change-password/change-password.component';
 import { ProductComponent } from './page/product/product.component';
@@ -19,13 +18,17 @@ import { ManagementProductsComponent } from './page/management-products/manageme
 import { PaymentMethodComponent } from './page/payment-method/payment-method.component';
 import { BuysComponent } from './page/buys/buys.component';
 import { DetailProductComponent } from './page/detail-product/detail-product.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AlertComponent } from './page/alert/alert.component';
 import { ProductCardComponent } from './page/product-card/product-card.component';
 import { ProfileComponent } from './page/profile/profile.component';
 import { NavUserComponent } from './page/nav-user/nav-user.component';
 import { HeaderComponent } from './page/header/header.component';
+import { AccountNoLoggedComponent } from './page/account-no-logged/account-no-logged.component';
+import { HomeAdminComponent } from './page/home-admin/home-admin.component';
+import { NavAdminComponent } from './page/nav-admin/nav-admin.component';
+import { PersonInterceptor } from './interceptor/person.interceptor';
 
 
 
@@ -37,7 +40,6 @@ import { HeaderComponent } from './page/header/header.component';
     SignupComponent,
     ForgetPasswordComponent,
     RestorePasswordComponent,
-    InfoPersonComponent,
     PaymentMethodInfoComponent,
     ChangePasswordComponent,
     ProductComponent,
@@ -52,7 +54,10 @@ import { HeaderComponent } from './page/header/header.component';
     ProductCardComponent,
     ProfileComponent,
     NavUserComponent,
-    HeaderComponent
+    HeaderComponent,
+    AccountNoLoggedComponent,
+    HomeAdminComponent,
+    NavAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +66,7 @@ import { HeaderComponent } from './page/header/header.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: PersonInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

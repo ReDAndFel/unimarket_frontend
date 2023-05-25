@@ -3,6 +3,8 @@ import { CartService } from "../../service/cart.service";
 import { ProductService } from "../../service/product.service";
 import { TransactionDetailDto } from "../../model/transaction-detail-dto";
 import { ProductGetDTO } from 'src/app/model/product-get-dto';
+import { TokenService } from 'src/app/service/token.service';
+import { SessionService } from 'src/app/service/session.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,8 +15,11 @@ export class CartComponent {
 
   products:TransactionDetailDto[];
   totalPrice:number;
+  isLogged = false;
+  idPerson!:string;
+  productGetDTO!: ProductGetDTO;
 
-  constructor(private cartService:CartService, private productService:ProductService) {
+  constructor(private cartService:CartService, private productService:ProductService, private tokenService: TokenService, private sessionService : SessionService) {
 
     this.products = [];
     this.totalPrice = 0;
@@ -25,13 +30,40 @@ export class CartComponent {
 
       for( let id of idList ){
 
-        const productGetDTO = this.productService.get(id);
+        this.productService.getProduct(id).subscribe({
+          next: data => {
+            this.productGetDTO = data.response;
+          },
+          error: error => {
+            console.log(error.error.response);
+          }
+        });
         
-        if(productGetDTO!=null){
-          this.products.push(new TransactionDetailDto(productGetDTO, 1));
-          //this.totalPrice += productGetDTO.price;
+        if(this.productGetDTO!=null){
+          this.products.push(new TransactionDetailDto(this.productGetDTO, 1));
+          this.totalPrice += this.productGetDTO.price;
         }
       }
     }
   }
+ 
+  ngOnInit(): void {
+    const objeto = this;
+    this.sessionService.currentMessage.subscribe({
+      next: data => {
+        objeto.actualizarSesion(data);
+      }
+    });
+    this.actualizarSesion(this.tokenService.isLogged());
+  }
+
+  private actualizarSesion(estado: boolean) {
+    this.isLogged = estado;
+    if (estado) {
+      this.idPerson = this.tokenService.getId()     
+    }
+  }
+  /*ngOnInit(): void {
+    this.isLogged = this.tokenService.isLogged();    
+    }*/
 }

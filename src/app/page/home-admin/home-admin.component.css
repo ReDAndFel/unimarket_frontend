@@ -35,19 +35,3 @@ input:focus {
   border-color: #ffc107;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgb(255, 193, 7);
 }
-
-@media only screen and (min-width:500px) {
-  .products_container{    
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    
-  }  
-}
-
-@media only screen and (min-width:992px) {
-  .products_container{    
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    
-  }  
-}

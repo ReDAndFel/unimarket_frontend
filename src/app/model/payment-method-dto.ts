@@ -4,4 +4,5 @@ export class PaymentMethodDTO {
   bankingEntity:string = "";
   expirationDate:Date = new Date();
   cvv:number = 0;
+  idPerson:string = "";
 }

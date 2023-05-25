@@ -4,7 +4,7 @@
   <div class="category_container">
     <div *ngFor="let item of categories">
 
-      <div class="category_card_container" (click)="selectCategory(item.name)">
+      <div class="category_card_container" (click)="selectCategory(item.id)">
         <div class="category_image">
           <img src="{{item.url_image}}" alt="img_{{item.name}}">
         </div>
