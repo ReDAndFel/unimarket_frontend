@@ -1,6 +1,12 @@
+<div *ngIf="!isLogged; then nologged else logged"></div>
+<ng-template #nologged>
+  <app-account-no-logged></app-account-no-logged>
+</ng-template>
+<ng-template #logged>
 <div class="main_container">
-    <app-header></app-header>
+    <app-header></app-header>    
     <div class="payment_method_container">
+        <h2>Metodos de pago </h2>
         <div *ngFor="let item of paymentMethods">
             <div class="payment_method_card">
                 <div class="info">
@@ -20,3 +26,4 @@
     </div>
     <app-nav-user></app-nav-user>
 </div>
+</ng-template>

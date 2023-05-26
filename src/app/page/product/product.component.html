@@ -48,6 +48,7 @@
         <button class="button_form" (click)="createProduct()" type="submit"
           [disabled]="f.invalid">Crear producto</button>
       </form>
+      <app-alert [alert]="alert"></app-alert>
     </div>
     <app-nav-user></app-nav-user>
   </div>

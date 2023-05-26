@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import {ProductService} from "../../service/product.service";
 import {ProductGetDTO} from "../../model/product-get-dto";
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/service/category.service';
 import { TokenService } from 'src/app/service/token.service';
 import { CategoryDTO } from 'src/app/model/category-dto';
 import { SessionService } from 'src/app/service/session.service';
 import {PaymentMethodGetDto} from "../../model/payment-method-get-dto";
+import { Alert } from 'src/app/model/alert';
 
 @Component({
   selector: 'app-management-products',
@@ -15,20 +16,18 @@ import {PaymentMethodGetDto} from "../../model/payment-method-get-dto";
 })
 export class ManagementProductsComponent {
   products!: ProductGetDTO[];
-  selectedList: ProductGetDTO[];
+  selectedList!: ProductGetDTO[];
   selected!: ProductGetDTO;
   textBtnDelete!: string;
-  btnText!:string;
-  iconText!:string;
-  categoryName!:string;
+  btnText!:string;  
   isLogged = false;
   idPerson!:string;
+  alert!:Alert;
 
-  constructor(private productService: ProductService,private tokenService: TokenService,private router: Router,private categoryService: CategoryService, private sessionService : SessionService) {
-
-    this.selectedList = [];
-
-
+  constructor(private route: ActivatedRoute,private productService: ProductService,private tokenService: TokenService,private router: Router,private categoryService: CategoryService, private sessionService : SessionService) {
+    this.route.params.subscribe(params => {
+      this.idPerson = params["idPerson"];
+    });
   }
   /*ngOnInit(): void {
     const objeto = this;
@@ -58,15 +57,15 @@ export class ManagementProductsComponent {
  ngOnInit(): void {
     this.isLogged = this.tokenService.isLogged();
     if(this.isLogged){
-      this.idPerson = this.tokenService.getId()
-      console.log(this.idPerson);
+      
       this.productService.listProductByPerson(this.idPerson).subscribe({
         next: data => {
+          
           this.products = data.response;
           console.log(this.products);
         },
         error: error => {
-          console.log(error.error.response);
+          this.alert = new Alert(error.error.response,"danger");
         }
       });
     }

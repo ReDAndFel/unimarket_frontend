@@ -29,6 +29,7 @@ import { AccountNoLoggedComponent } from './page/account-no-logged/account-no-lo
 import { HomeAdminComponent } from './page/home-admin/home-admin.component';
 import { NavAdminComponent } from './page/nav-admin/nav-admin.component';
 import { PersonInterceptor } from './interceptor/person.interceptor';
+import { DetailBuyComponent } from './page/detail-buy/detail-buy.component';
 
 
 
@@ -57,7 +58,8 @@ import { PersonInterceptor } from './interceptor/person.interceptor';
     HeaderComponent,
     AccountNoLoggedComponent,
     HomeAdminComponent,
-    NavAdminComponent
+    NavAdminComponent,
+    DetailBuyComponent
   ],
   imports: [
     BrowserModule,

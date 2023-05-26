@@ -17,15 +17,14 @@ export class HomeComponent {
   minPrice!: string;
   maxPrice!: string;
   filter!: string;
-  products!: ProductGetDTO[];
-  filtro!: ProductGetDTO[]
+  filtro: ProductGetDTO[] = [];
   roles!: string[];
   isMod = false;
   alert!: Alert;
   isLogged: boolean = false;
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService, private tokenService: TokenService, private sessionService:SessionService) {
+  constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService, private tokenService: TokenService, private sessionService: SessionService) {
 
 
     this.route.params.subscribe(params => {
@@ -33,76 +32,8 @@ export class HomeComponent {
       this.filter = params["filter"];
       this.minPrice = params["minPrice"];
       this.maxPrice = params["maxPrice"];
-
-
-      console.log("minPrice:" + this.minPrice);
-      console.log("maxPrice:" + this.maxPrice);
-      console.log("filter:" + this.filter);
-      console.log("textoBusqueda:" + this.textoBusqueda);
-
-      if (this.textoBusqueda == null && this.filter == null) {
-        this.productService.listarAllProducts().subscribe({
-          next: data => {
-            this.products = data.response;
-            this.filtro = this.products;
-          },
-          error: error => {
-            console.log(error.error.response);
-          }
-        });
-
-      }
-
-      if (this.filter != null) {
-
-        if (this.textoBusqueda != null) {
-          if (this.filter == "categoria") {
-
-            this.productService.listProductByCategory(this.textoBusqueda).subscribe({
-              next: data => {
-                console.log(data);
-                this.products = data.response;
-                this.filtro = this.products;
-
-              },
-              error: error => {
-                console.log(error.error.response);
-              }
-            });
-          }
-
-          if (this.filter == "titulo") {
-
-            this.productService.listProductByTitle(this.textoBusqueda).subscribe({
-              next: data => {
-                this.products = data.response;
-                this.filtro = this.products;
-
-              },
-              error: error => {
-                console.log(error.error.response);
-              }
-            });
-          }
-        }
-
-        if (this.filter == "precio" && this.minPrice != null && this.maxPrice != null) {
-
-          console.log("es precios");
-          this.productService.listProductByPrice(parseInt(this.minPrice), parseInt(this.maxPrice)).subscribe({
-            next: data => {
-              console.log(data);
-              this.products = data.response;
-              this.filtro = this.products;
-              console.log(this.filtro.length);
-            },
-            error: error => {
-              console.log(error.error.response);
-            }
-          });
-        }
-      }
     });
+
 
 
   }
@@ -112,7 +43,7 @@ export class HomeComponent {
     }
   }
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     const objeto = this;
     this.sessionService.currentMessage.subscribe({
       next: data => {
@@ -132,15 +63,74 @@ export class HomeComponent {
         this.isMod = true;
       }
     }
-  }
-  /*ngOnInit(): void {
+  }*/
+  ngOnInit(): void {
+    if (this.textoBusqueda == null && this.filter == null) {
+      this.productService.listarAllProducts().subscribe({
+        next: data => {
+          console.log("data response=" + data.response);
+          this.filtro = data.response;
+        },
+        error: error => {
+          console.log(error.error.response);
+        }
+      });
+
+    }
+
+    if (this.textoBusqueda != null && this.filter != null ){
+      if (this.filter == "categoria") {
+        console.log("Entré a filtrar por categoría");
+
+        this.productService.listProductByCategory(parseInt(this.textoBusqueda)).subscribe({
+          next: data => {
+            console.log("data response =" + data.response);
+            this.filtro = data.response;
+
+          },
+          error: error => {
+            console.log(error.error.response);
+          }
+        });
+      }
+
+      if (this.filter == "titulo") {
+        console.log("Entré a filtrar por titulo");
+
+        this.productService.listProductByTitle(this.textoBusqueda).subscribe({
+          next: data => {
+            console.log("data response=" + data.response);
+            this.filtro = data.response;
+          },
+          error: error => {
+            console.log(error.error.response);
+          }
+        });
+      }
+
+      if (this.filter == "precio" && this.minPrice != null && this.maxPrice != null) {
+
+        console.log("es precios");
+        this.productService.listProductByPrice(parseInt(this.minPrice), parseInt(this.maxPrice)).subscribe({
+          next: data => {
+            console.log(data);
+            this.filtro = data.response;
+          },
+          error: error => {
+            console.log(error.error.response);
+          }
+        });
+      }
+    }
     this.roles = this.tokenService.getRol();
 
-    if(this.roles[0] == "MODERADOR") {
+    if (this.roles[0] == "MODERADOR") {
 
-    this.isMod = true;
-  }*/
+      this.isMod = true;
+    }
 
+  }
 }
+
 
 

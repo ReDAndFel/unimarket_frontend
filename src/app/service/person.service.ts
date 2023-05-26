@@ -28,4 +28,7 @@ export class PersonService {
   public recuperatePassword(email:string): Observable<MessageDTO> {
     return this.http.put<MessageDTO>(`${this.userUrl}/recuperar_contraseña`, email);
   }
+  public get(idPerson:string): Observable<MessageDTO> {
+    return this.http.get<MessageDTO>(`${this.userUrl}/obtener/${idPerson}`);
+  }
 }

@@ -10,18 +10,22 @@
         <table class="table_buys">
             <thead>
                 <tr>                    
-                    <th>Fecha</th>
-                    <th>Precio total</th>
+                    <th>Producto ID</th>
+                    <th>Unidades</th>
+                    <th>Precio</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr *ngFor="let item of transactions" (click)="getTransactionDetail(item.id)">
+                <tr *ngFor="let item of transactionsDetails">
                     <td>
-                        <p>{{item.date}}</p>
+                        <p>{{item.idProduct}}</p>
                     </td>
                     <td>
-                        <p>{{item.totalPrice}}</p>
-                    </td>                    
+                        <p>{{item.unities}}</p>
+                    </td>          
+                    <td>
+                        <p>{{item.price}}</p>
+                    </td>          
                 </tr>
             </tbody>
         </table>

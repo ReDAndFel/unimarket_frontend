@@ -10,8 +10,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProductService {
-  products!: ProductGetDTO[];
 
+  favoriteProductsPerson!:number[];
+  
   private userUrl = "http://localhost:8080/api/productos";
   constructor(private http: HttpClient) {
 
@@ -24,8 +25,8 @@ export class ProductService {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener/${id}`);
   }
 
-  public listProductByCategory(category: string): Observable<MessageDTO> {
-    return this.http.get<MessageDTO>(`${this.userUrl}/obtener_productos_categoria/${category}`);
+  public listProductByCategory(idCategory: number): Observable<MessageDTO> {
+    return this.http.get<MessageDTO>(`${this.userUrl}/obtener_productos_categoria/${idCategory}`);
   }
 
   public listProductByPerson(idPerson: string): Observable<MessageDTO> {
@@ -63,6 +64,20 @@ export class ProductService {
 
   public deleteProduct(id: number): Observable<MessageDTO> {
     return this.http.delete<MessageDTO>(`${this.userUrl}/eliminar/${id}`);
+  }
+
+  public isFavorite(idPerson:string, idProduct:number){
+    this.listFavoriteProducts(idPerson).subscribe({
+      next: data => {          
+        this.favoriteProductsPerson = data.response.id;        
+      },      
+    });
+    
+    if(this.favoriteProductsPerson.includes(idProduct)){
+      return true;
+    }
+    return false;
+
   }
 
  /* public get(idProduct: number) {

@@ -1,6 +1,111 @@
-<button (click)="addCart()" class="btn btn-outline-primary" ><i class="fa-solid
-    fa-cart-plus me-2"></i>Agregar al carrito</button>
+<div class="main_container">
+  <app-header></app-header>
 
-<div class="nav_container">
+  <div class="product_container">
+    <div class="img_container">
+      <img src="{{product.images[0].url}}" alt="{{product.title}}_img">
+    </div>
+
+    <div class="product_info">
+      <h1>{{product.title}}</h1>
+      <div class="price_container">
+        <span>$ {{product.price}}</span>
+      </div>
+      <div class="description_container">
+        <p>{{product.description}}</p>
+      </div>
+    </div>
+
+    <div class="logged_container" *ngIf="isLogged">
+
+      <div class="button_container">
+        <i *ngIf="!isFavorite" class="fa-regular fa-heart"></i>
+        <i *ngIf="isFavorite" class="fa-solid fa-heart"></i>
+        <button (click)="addCart()" class="btn "><i class="fa-solid fa-cart-plus me-2"></i>Agregar al carrito</button>
+      </div>
+
+      <div class="comment_container">
+        <form class="form_comment" #f="ngForm">
+
+          <div class="textfield">
+            <textarea placeholder="Ingrese su comentario" name="comment" [(ngModel)]="comment.comment"
+              required></textarea>
+          </div>
+
+          <div class="textfield cbPuntuation">
+            <select class="cbPuntuation" name="select" [(ngModel)]="comment.puntuation" required>
+              <option value=" " selected>Selecciona una puntuacion</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+          <button type="submit" [disabled]="f.invalid" class="btn btn-primary" (click)="createComment()">
+            Publicar comentario
+          </button>
+        </form>
+      </div>
+
+      <div class="commentList_container">
+        <h3>Reseñas</h3>
+        <div *ngFor="let item of comments">
+
+          <div class="comment_card">
+            <div class="user_column">
+              <span>user: {{item.idPerson}}</span>
+            </div>
+            <div class="info_comment">
+              <span>{{item.dateComment}}</span>
+              <span>{{item.comment}}</span>
+              <span>Puntuacion: {{item.puntuation}}</span>              
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+    <app-alert [alert]="alert"></app-alert>
+  </div>
   <app-nav-user></app-nav-user>
 </div>
+
+<!--<div class="main_container">
+  <app-header></app-header>
+  <div class="product_form_container">
+    <h1>Información del producto</h1>
+    <form class="form_product" #f="ngForm">
+      <div class="textfield">
+        <label>Titulo: </label>
+        <input type="text" name="title" [(ngModel)]="product.title" required />
+      </div>
+      <div class="textfield">
+        <label>Descripcion: </label>
+        <textarea name="description" [(ngModel)]="product.description" required></textarea>
+      </div>
+      <div class="textfield">
+        <label>Precio: </label>
+        <input type="number" name="price" [(ngModel)]="product.realPrice" required />
+      </div>
+      <div class="textfield">
+        <label>Unidades: </label>
+        <input type="number" name="units" [(ngModel)]="product.unities" required />
+      </div>
+      <div class="textfield">
+        <label>Descuento: </label>
+        <input type="number" name="discount" [(ngModel)]="product.discount" />
+      </div>
+            
+      <button (click)="addCart()" class="btn btn-outline-primary" ><i class="fa-solid
+        fa-cart-plus me-2"></i>Agregar al carrito</button>
+        <app-alert [alert]="alert"></app-alert>
+    
+    </form>
+  </div>
+<app-alert [alert]="alert"></app-alert>
+</div>-->

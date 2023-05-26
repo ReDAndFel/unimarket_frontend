@@ -2,26 +2,25 @@
 <ng-template #nologged>
   <app-account-no-logged></app-account-no-logged>
 </ng-template>
-
 <ng-template #logged>
   <div class="main_container">
     <app-header></app-header>
     <div class="card p-5">
       <form #f="ngForm" *ngIf="products.length > 0">
         <div class="table-responsive text-center">
-          <table class="table table-hover">
+          <table class="table">
             <thead>
               <tr>
-                <th></th>
-                <th style="width: 40%;">Producto</th>
-                <th style="width: 20%;">Precio</th>
-                <th style="width: 20%;">Unidades</th>
-                <th style="width: 20%;">Subtotal</th>
+                
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Unidades</th>
+                <th>Subtotal</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of products">
-                <td></td>
+                
                 <td>
                   <div class="d-flex text-start align-items-center">
                     <div class="col-4 me-3 ms-3">
@@ -35,12 +34,35 @@
                 </td>
                 <td class="align-middle">
 
-                  <input type="number" name="unidades" class="form-control text-center" [(ngModel)]="item.units" min="0" />
-
+                  <input type="number" name="unidades" class="form-control text-center" [(ngModel)]="item.units" min="0" (change)="updateTotalPrice()" />
+                  
                 </td>
                 <td class="align-middle">
-                  <span>$ {{item.product.unities * item.product.price}}</span>
+                  <span>$ {{item.units * item.product.price}}</span>
                 </td>
+                <td class="align-middle">
+                  <i class="fa-solid fa-trash" data-bs-toggle="modal"
+                  data-bs-target="#borrar" ></i>
+                </td>
+
+                <div class="modal fade" id="borrar" tabindex="-1" aria-labelledby="borrarModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="borrarModalLabel">Eliminar producto</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>¿Está seguro que desea borrar los elementos seleccionados?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteProductCart(item)">Sí</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
               </tr>
             </tbody>
           </table>
@@ -60,5 +82,7 @@
     </div>
     <app-nav-user></app-nav-user>
   </div>
+
+  
 
 </ng-template>

@@ -10,19 +10,16 @@ import { PaymentMethodDTO } from '../model/payment-method-dto';
 })
 export class PaymentMethodService {
 
-  paymentMethods!: PaymentMethodGetDto[];
-  
-
   private userUrl = "http://localhost:8080/api/metodos_de_pago";
   constructor(private http: HttpClient) {
 
   }
   public createPaymentMethod(paymentMethod: PaymentMethodDTO): Observable<MessageDTO> {
-    return this.http.post<MessageDTO>(`${this.userUrl}/crear`, PaymentMethodDTO);
+    return this.http.post<MessageDTO>(`${this.userUrl}/crear`, paymentMethod);
   }
 
-  public updatePaymentMethod(idPaymentMethod: number, product: PaymentMethodGetDto): Observable<MessageDTO> {
-    return this.http.put<MessageDTO>(`${this.userUrl}/actualizar/${idPaymentMethod}`, PaymentMethodDTO);
+  public updatePaymentMethod(idPaymentMethod: number, paymentMethod: PaymentMethodGetDto): Observable<MessageDTO> {
+    return this.http.put<MessageDTO>(`${this.userUrl}/actualizar/${idPaymentMethod}`, paymentMethod);
 
   }
 

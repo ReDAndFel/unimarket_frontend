@@ -48,8 +48,14 @@ export class CartComponent {
       }
     }
   }
+  public deleteProductCart(transactionDetail:TransactionDetailDto){
+    
+    this.products = this.products.filter(product => product != transactionDetail);
+    this.updateTotalPrice();
+    
+  }
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     const objeto = this;
     this.sessionService.currentMessage.subscribe({
       next: data => {
@@ -64,8 +70,15 @@ export class CartComponent {
     if (estado) {
       this.idPerson = this.tokenService.getId()
     }
-  }
-  /*ngOnInit(): void {
+  }*/
+  ngOnInit(): void {
     this.isLogged = this.tokenService.isLogged();
-    }*/
+    }
+
+    public updateTotalPrice(){
+      this.totalPrice = 0;
+      for(let item of this.products){
+          this.totalPrice += (item.product.price * item.units);
+      }
+    }
 }

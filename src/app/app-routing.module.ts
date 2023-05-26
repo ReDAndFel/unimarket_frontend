@@ -17,6 +17,7 @@ import {BuysComponent} from "./page/buys/buys.component";
 import { DetailProductComponent } from './page/detail-product/detail-product.component';
 import { ProfileComponent } from './page/profile/profile.component';
 import { LoginGuard } from './guards/permission.service';
+import { DetailBuyComponent } from './page/detail-buy/detail-buy.component';
 
 
 
@@ -40,11 +41,12 @@ const routes: Routes = [
   { path: "cuenta", component: AccountComponent },
   { path: "carrito", component: CartComponent },
   { path: "categoria", component: CategoryComponent },
-  { path: "gestion_productos", component: ManagementProductsComponent },
-  { path: "compras", component: BuysComponent },
+  { path: "gestion_productos/:idPerson", component: ManagementProductsComponent },
+  { path: "compras/:idPerson", component: BuysComponent },
   { path: "producto/:id", component: DetailProductComponent },
  // { path: "detail", component: DetailProductComponent },
-  { path: "perfil", component: ProfileComponent },
+  { path: "perfil/:idPerson", component: ProfileComponent },
+  { path: "compra/:idTransaction", component: DetailBuyComponent },
 
 
   { path: "**", pathMatch: "full", redirectTo: "" }

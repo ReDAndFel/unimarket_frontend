@@ -8,6 +8,7 @@ import { ProductService } from 'src/app/service/product.service';
 import {CategoryDTO} from "../../model/category-dto";
 import {TokenService} from "../../service/token.service";
 import { SessionService } from 'src/app/service/session.service';
+import { Alert } from 'src/app/model/alert';
 
 @Component({
   selector: 'app-product',
@@ -21,6 +22,7 @@ export class ProductComponent {
   textButton!: string;
   isLogged: boolean = false;
   idPerson!:string;
+  alert!:Alert;
 
   constructor(private sessionService : SessionService,private router: Router, private imageService: ImageService,private tokenService: TokenService, private categoryService: CategoryService, private productService: ProductService) {
     this.product = new ProductDTO();
@@ -62,7 +64,7 @@ export class ProductComponent {
           this.categories = data.response;
         },
         error: error => {
-          console.log(error.error.response);
+          this.alert = new Alert (error.error.response,"danger");
         }
       });
     }
@@ -83,9 +85,10 @@ export class ProductComponent {
       this.imageService.subir(formData).subscribe({
         next: data => {
           this.product.images.push( new ImageDto(data.response.public_id, data.response.url) );
+          this.alert = new Alert ("La imagen se subio con exito","success");
         },
         error: error => {
-          console.log(error.error);
+          this.alert = new Alert (error.error.response,"danger");
         }
       });
     } else {
@@ -94,18 +97,18 @@ export class ProductComponent {
   }
 
   createProduct() {
-    if (this.product.images.length > 0) {
+    if (this.product.images.length > 0 && this.product.idCategory != null) {
       this.product.idPerson = this.idPerson;
       this.productService.createProduct(this.product).subscribe({
         next: data => {
-          console.log(data.response);
+          this.alert = new Alert (data.response,"success");
         },
         error: error => {
-          console.log(error.error);
+          this.alert = new Alert (error.error.response,"danger");
         }
       });
     } else {
-      console.log('Debe seleccionar al menos una imagen y subirla');
+      this.alert = new Alert ("Debe seleccionar al menos una imagen y subirla y elegir una categoría","danger");
     }
   }
   updateProduct() {
