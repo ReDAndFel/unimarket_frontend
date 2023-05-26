@@ -11,7 +11,7 @@ import { ProductGetDTO } from 'src/app/model/product-get-dto';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent {
-  categories!: any[];
+  categories!: CategoryDTO[];
   products!: ProductGetDTO[];
   
 
@@ -29,7 +29,7 @@ export class CategoryComponent {
    
   }
 
-  public selectCategory(category: number) {
-    this.router.navigate(["busqueda/categoria", category]);
+  public selectCategory(idCategory: number) {
+    this.router.navigate(["busqueda/categoria", idCategory]);
   }
 }

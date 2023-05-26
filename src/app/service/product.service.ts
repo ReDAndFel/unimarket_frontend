@@ -37,7 +37,7 @@ export class ProductService {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_favoritos_persona/${idPerson}`);
   }
 
-  public listProductByPrice(maxPrice: number, minPrice: number): Observable<MessageDTO> {
+  public listProductByPrice(minPrice: number, maxPrice: number): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_productos_precio/${minPrice}/${maxPrice}`);
   }  
 

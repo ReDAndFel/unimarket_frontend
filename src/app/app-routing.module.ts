@@ -25,8 +25,9 @@ import { DetailBuyComponent } from './page/detail-buy/detail-buy.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "busqueda/:filter/:text", component: HomeComponent },
-  { path: "busqueda/:filter/:minPrice/:maxPrice", component: HomeComponent },
+  { path: "busqueda/titulo/:textTitulo", component: HomeComponent },
+  { path: "busqueda/precio/:minPrice/:maxPrice", component: HomeComponent },
+  { path: "busqueda/categoria/:idCategoria", component: HomeComponent },
   { path: "login", component: LoginComponent , canActivate: [LoginGuard]},
   { path: "signup", component: SignupComponent ,canActivate: [LoginGuard]},
   { path: "olvide_mi_contraseña", component: ForgetPasswordComponent },

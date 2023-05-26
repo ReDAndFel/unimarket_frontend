@@ -13,11 +13,11 @@ import { SessionService } from 'src/app/service/session.service';
 })
 export class HomeComponent {
 
-  textoBusqueda!: string;
+  
   minPrice!: string;
   maxPrice!: string;
   filter!: string;
-  filtro: ProductGetDTO[] = [];
+  products: ProductGetDTO[] = [];
   roles!: string[];
   isMod = false;
   alert!: Alert;
@@ -26,20 +26,13 @@ export class HomeComponent {
 
   constructor(private router: Router, private route: ActivatedRoute, private productService: ProductService, private tokenService: TokenService, private sessionService: SessionService) {
 
-
-    this.route.params.subscribe(params => {
-      this.textoBusqueda = params["text"];
-      this.filter = params["filter"];
-      this.minPrice = params["minPrice"];
-      this.maxPrice = params["maxPrice"];
-    });
-
-
-
+    
   }
   public iraBusqueda(valor: string) {
     if (valor) {
       this.router.navigate(["busqueda/titulo", valor]);
+    }else{
+      this.router.navigate([""]);
     }
   }
 
@@ -65,63 +58,71 @@ export class HomeComponent {
     }
   }*/
   ngOnInit(): void {
-    if (this.textoBusqueda == null && this.filter == null) {
-      this.productService.listarAllProducts().subscribe({
-        next: data => {
-          console.log("data response=" + data.response);
-          this.filtro = data.response;
-        },
-        error: error => {
-          console.log(error.error.response);
+
+    this.productService.listarAllProducts().subscribe({
+      next: data => {
+        this.products = data.response;
+      },
+      error: error => {
+        console.log(error.error.response);
+      }
+    });
+    
+    this.route.paramMap.subscribe(params => {
+
+      const titulo = params.get("textTitulo");
+      const categoria = params.get("idCategoria");
+      const minPrice = params.get("minPrice");
+      const maxPrice = params.get("maxPrice");
+
+      /*if (titulo == null) {
+        console.log("busqueda vacía")
+        
+  
+      }*/
+  
+      if (titulo != null){
+        console.log("titulo es diferente de null!")
+        this.productService.listProductByTitle(titulo).subscribe({
+          next: data => {
+            this.products = data.response;
+          },
+          error: error => {
+            console.log(error.error.response);
+          }
+        });
+      }
+
+        if (categoria != null) {    
+          console.log("categoria es diferente de null!")      
+  
+          this.productService.listProductByCategory(parseInt(categoria,10)).subscribe({
+            next: data => {
+              
+              this.products = data.response;
+              console.log(this.products);
+  
+            },
+            error: error => {
+              console.log(error.error.response);
+            }
+          });
         }
-      });
-
-    }
-
-    if (this.textoBusqueda != null && this.filter != null ){
-      if (this.filter == "categoria") {
-        console.log("Entré a filtrar por categoría");
-
-        this.productService.listProductByCategory(parseInt(this.textoBusqueda)).subscribe({
-          next: data => {
-            console.log("data response =" + data.response);
-            this.filtro = data.response;
-
-          },
-          error: error => {
-            console.log(error.error.response);
-          }
-        });
-      }
-
-      if (this.filter == "titulo") {
-        console.log("Entré a filtrar por titulo");
-
-        this.productService.listProductByTitle(this.textoBusqueda).subscribe({
-          next: data => {
-            console.log("data response=" + data.response);
-            this.filtro = data.response;
-          },
-          error: error => {
-            console.log(error.error.response);
-          }
-        });
-      }
-
-      if (this.filter == "precio" && this.minPrice != null && this.maxPrice != null) {
-
-        console.log("es precios");
-        this.productService.listProductByPrice(parseInt(this.minPrice), parseInt(this.maxPrice)).subscribe({
-          next: data => {
-            console.log(data);
-            this.filtro = data.response;
-          },
-          error: error => {
-            console.log(error.error.response);
-          }
-        });
-      }
-    }
+  
+        if (minPrice != null && maxPrice != null) {
+          console.log("precio minimo y maximo es diferente de null!")      
+          this.productService.listProductByPrice(parseFloat(minPrice),parseFloat(maxPrice)).subscribe({
+            next: data => {
+              this.products = data.response;
+            },
+            error: error => {
+              console.log(error.error.response);
+            }
+          });
+        }         
+        
+    });
+    
     this.roles = this.tokenService.getRol();
 
     if (this.roles[0] == "MODERADOR") {
