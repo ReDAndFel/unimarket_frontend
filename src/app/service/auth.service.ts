@@ -11,18 +11,18 @@ import { TokenDTO } from '../model/token-dto';
 })
 export class AuthService {
 
-  private authURL = "unimarket-production-29a2.up.railway.app/api/auth";
+  private authURL = "https://unimarket-production-9961.up.railway.app/api/auth";
   constructor(private http:HttpClient) { }
 
   public registrar(usuario:PersonDTO):Observable<MessageDTO>{
     return this.http.post<MessageDTO>(`${this.authURL}/registro`, usuario);
   }
-  
+
   public login(sesion:SessionDTO):Observable<MessageDTO>{
     return this.http.post<MessageDTO>(`${this.authURL}/login`, sesion);
   }
   public refresh(token:TokenDTO):Observable<MessageDTO>{
     return this.http.post<MessageDTO>(`${this.authURL}/refresh`, token);
   }
-  
+
 }

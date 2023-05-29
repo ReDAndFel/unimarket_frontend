@@ -9,10 +9,10 @@ import { PersonGetDTO } from '../model/person-get-dto';
   providedIn: 'root'
 })
 export class PersonService {
-  private userUrl = "unimarket-production-29a2.up.railway.app/api/personas";
+  private userUrl = "https://unimarket-production-9961.up.railway.app/api/personas";
 
   constructor(private http: HttpClient) { }
-  
+
   public updatePerson(id:string, person:PersonGetDTO): Observable<MessageDTO> {
     return this.http.put<MessageDTO>(`${this.userUrl}/actualizar/${id}`, person);
   }

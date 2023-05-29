@@ -9,9 +9,9 @@ import { Observable } from 'rxjs';
 })
 export class CategoryService {
 
-  private catURL = "unimarket-production-29a2.up.railway.app/api/categorias";
+  private catURL = "https://unimarket-production-9961.up.railway.app/api/categorias";
 
-  categories!: any[];;
+  categories!: any[];
   constructor(private http: HttpClient) {
 
   }
@@ -21,6 +21,6 @@ export class CategoryService {
 
   public getCategory(idCategory:number): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.catURL}/obtener/${idCategory}`);
-  }  
+  }
 
 }

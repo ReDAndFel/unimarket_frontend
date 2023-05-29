@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TransactionService {
-  
-  private userUrl = "unimarket-production-29a2.up.railway.app/api/transacciones";
+
+  private userUrl = "https://unimarket-production-9961.up.railway.app/api/transacciones";
 
   constructor(private http: HttpClient) {}
 
@@ -17,7 +17,7 @@ export class TransactionService {
     return this.http.post<MessageDTO>(`${this.userUrl}/crear`, transactionDTO);
   }
 
-  
+
   public listTransactionByPerson(idPerson:string): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_transaction_person/${idPerson}`);
   }

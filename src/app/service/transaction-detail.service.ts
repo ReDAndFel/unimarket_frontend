@@ -7,12 +7,12 @@ import { MessageDTO } from '../model/message-dto';
   providedIn: 'root'
 })
 export class TransactionDetailService {
-  private userUrl = "unimarket-production-29a2.up.railway.app/api/detalles_transacciones";
+  private userUrl = "https://unimarket-production-9961.up.railway.app/api/detalles_transacciones";
 
   constructor(private http: HttpClient) {}
 
   public listTransactionDetailsByTransaction(idTransaction:number): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_detalles_transaccion/${idTransaction}`);
   }
-  
+
 }

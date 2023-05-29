@@ -9,14 +9,14 @@ import { ProductGetDTO } from '../model/product-get-dto';
 })
 export class ModeratorService {
 
-  private userUrl = "unimarket-production-29a2.up.railway.app/api/moderador";
+  private userUrl = "https://unimarket-production-9961.up.railway.app/api/moderador";
 
   constructor(private http: HttpClient) { }
 
   public listarAllProducts(): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_productos`);
   }
-  
+
   public listProductByState(state: string): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_productos_estado/${state}`);
   }
