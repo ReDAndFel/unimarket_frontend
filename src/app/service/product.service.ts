@@ -11,8 +11,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductService {
 
-  favoriteProductsPerson!:number[];
-  
+  favoriteProductsPerson!:ProductGetDTO[];
+
   private userUrl = "http://localhost:8080/api/productos";
   constructor(private http: HttpClient) {
 
@@ -39,17 +39,17 @@ export class ProductService {
 
   public listProductByPrice(minPrice: number, maxPrice: number): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_productos_precio/${minPrice}/${maxPrice}`);
-  }  
+  }
 
   public listProductByTitle(title: string): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_productos_titulo/${title}`);
   }
 
-  public addProductToFavorite(idPerson: string, idProduct: string): Observable<MessageDTO> {
+  public addProductToFavorite(idPerson: string, idProduct: number): Observable<MessageDTO> {
     return this.http.post<MessageDTO>(`${this.userUrl}/agregar_producto_favorito/${idPerson}/${idProduct}`, idPerson);
   }
 
-  public deleteProductToFavorite(idPerson: string, idProduct: string): Observable<MessageDTO> {
+  public deleteProductToFavorite(idPerson: string, idProduct: number): Observable<MessageDTO> {
     return this.http.delete<MessageDTO>(`${this.userUrl}/quitar_producto_favorito/${idPerson}/${idProduct}`);
   }
 
@@ -66,23 +66,11 @@ export class ProductService {
     return this.http.delete<MessageDTO>(`${this.userUrl}/eliminar/${id}`);
   }
 
-  public isFavorite(idPerson:string, idProduct:number){
-    this.listFavoriteProducts(idPerson).subscribe({
-      next: data => {          
-        this.favoriteProductsPerson = data.response.id;        
-      },      
-    });
-    
-    if(this.favoriteProductsPerson.includes(idProduct)){
-      return true;
-    }
-    return false;
 
-  }
 
  /* public get(idProduct: number) {
     this.products.forEach((product) => {
-      
+
     });
   }*/
 

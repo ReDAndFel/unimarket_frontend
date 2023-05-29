@@ -1,25 +1,31 @@
 <nav class="nav">
   <ul>
     <li class="nav_item">
+      <a routerLink="" class="nav_link">
+        <i class="fa-solid fa-house"></i>
+        Home
+      </a>
+    </li>
+    <li class="nav_item">
       <a routerLink="/cuenta" class="nav_link">
         <i class="fa-regular fa-user"></i>
         Cuenta
       </a>
     </li>
     <li class="nav_item">
-      <a routerLink="/productos_aprobados" class="nav_link">
+      <a routerLink="estado/APROBADO" class="nav_link">
         <i class="fa-regular fa-square-check"></i>
         Aprobado
       </a>
     </li>
     <li class="nav_item">
-      <a routerLink="/productos_denegados" class="nav_link">
+      <a routerLink="estado/DENEGADO" class="nav_link">
         <i class="fa-solid fa-ban"></i>
         Denegado
       </a>
     </li>
     <li class="nav_item">
-      <a routerLink="/productos_pendentes_revision" class="nav_link">
+      <a routerLink="estado/PENDIENTE_REVISION" class="nav_link">
         <i class="fa-regular fa-clock"></i>
         Pendiente
       </a>

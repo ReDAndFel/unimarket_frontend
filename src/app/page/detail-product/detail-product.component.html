@@ -17,63 +17,85 @@
     </div>
 
     <div class="logged_container" *ngIf="isLogged">
+      <div class="logged_user" *ngIf="!isMod">
 
-      <div class="button_container">
-        <i *ngIf="!isFavorite" class="fa-regular fa-heart"></i>
-        <i *ngIf="isFavorite" class="fa-solid fa-heart"></i>
-        <button (click)="addCart()" class="btn "><i class="fa-solid fa-cart-plus me-2"></i>Agregar al carrito</button>
-      </div>
-
-      <div class="comment_container">
-        <form class="form_comment" #f="ngForm">
-
-          <div class="textfield">
-            <textarea placeholder="Ingrese su comentario" name="comment" [(ngModel)]="comment.comment"
-              required></textarea>
+        <div class="button_container">
+          <div class="container_button_follow">
+            <i class="fa-regular fa-heart" (click)="addFavorite(product.id)"></i>
           </div>
-
-          <div class="textfield cbPuntuation">
-            <select class="cbPuntuation" name="select" [(ngModel)]="comment.puntuation" required>
-              <option value=" " selected>Selecciona una puntuacion</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-          <button type="submit" [disabled]="f.invalid" class="btn btn-primary" (click)="createComment()">
-            Publicar comentario
-          </button>
-        </form>
-      </div>
-
-      <div class="commentList_container">
-        <h3>Reseñas</h3>
-        <div *ngFor="let item of comments">
-
-          <div class="comment_card">
-            <div class="user_column">
-              <span>user: {{item.idPerson}}</span>
-            </div>
-            <div class="info_comment">
-              <span>{{item.dateComment}}</span>
-              <span>{{item.comment}}</span>
-              <span>Puntuacion: {{item.puntuation}}</span>              
-            </div>
-
-          </div>
-
+          <button (click)="addCart(product.id)" class="btn "><i class="fa-solid fa-cart-plus me-2"></i>Agregar al
+            carrito</button>
         </div>
 
+        <div class="comment_container">
+          <form class="form_comment" #f="ngForm">
 
+            <div class="textfield">
+              <textarea placeholder="Ingrese su comentario" name="comment" [(ngModel)]="comment.comment"
+                required></textarea>
+            </div>
+
+            <div class="textfield cbPuntuation">
+              <select class="cbPuntuation" name="select" [(ngModel)]="comment.puntuation" required>
+                <option selected>Selecciona una puntuacion</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <button type="submit" [disabled]="f.invalid" class="btn btn-primary" (click)="createComment()">
+              Publicar comentario
+            </button>
+            <app-alert [alert]="alert"></app-alert>
+          </form>
+        </div>
+
+        <div class="commentList_container">
+          <h3>Reseñas</h3>
+          <div *ngFor="let item of comments">
+
+            <div class="comment_card">
+              <div class="user_column">
+                <span>user: {{item.idPerson}}</span>
+              </div>
+              <div class="info_comment">
+                <span>{{item.dateComment}}</span>
+                <span>{{item.comment}}</span>
+                <span>Puntuacion: {{item.puntuation}}</span>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
 
+      <div class="logged_mod" *ngIf="isMod">
+        <div class="review_container">
+          <form class="form_review" #f="ngForm">
+            <div class="textfield cbReview">
+              <select class="cbReview" name="select" [(ngModel)]="product.stateProduct" required>
+                <option selected >Selecciona un estado para el producto</option>
+                <option value="0">APROBADO</option>
+                <option value="1">DENEGADO</option>
+                <option value="2">PENDIENTE_REVISION</option>
+              </select>
+            </div>
+            <button type="submit" [disabled]="f.invalid" class="btn btn-primary" (click)="reviewProduct(product.id)">
+              Revisar producto
+            </button>
+            <app-alert [alert]="alert"></app-alert>
+          </form>     
+        </div>
+      </div>
     </div>
-    <app-alert [alert]="alert"></app-alert>
+
   </div>
+  
   <app-nav-user></app-nav-user>
 </div>
+
 
 <!--<div class="main_container">
   <app-header></app-header>
@@ -100,11 +122,11 @@
         <label>Descuento: </label>
         <input type="number" name="discount" [(ngModel)]="product.discount" />
       </div>
-            
+
       <button (click)="addCart()" class="btn btn-outline-primary" ><i class="fa-solid
         fa-cart-plus me-2"></i>Agregar al carrito</button>
         <app-alert [alert]="alert"></app-alert>
-    
+
     </form>
   </div>
 <app-alert [alert]="alert"></app-alert>

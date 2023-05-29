@@ -66,10 +66,9 @@
         <div class="favorite_products_container">
           <h2>Mis productos favoritos</h2>
           <div class="favorite_product_list">
-            <p>product1</p>
-            <p>product1</p>
-            <p>product1</p>
-            <p>product1</p>
+            <div class = "item_product" *ngFor="let product of favoriteProducts">
+              <app-product-card [product]="product"></app-product-card>
+            </div>
           </div>
         </div>
         <button type="button" (click)="logout()" class="btn btn-warning">Logout</button>

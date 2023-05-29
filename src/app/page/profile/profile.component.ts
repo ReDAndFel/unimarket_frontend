@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Alert } from 'src/app/model/alert';
-import { PersonDTO } from 'src/app/model/person-dto';
+import { PersonGetDTO } from 'src/app/model/person-get-dto';
 import { PersonService } from 'src/app/service/person.service';
 import { SessionService } from 'src/app/service/session.service';
 import { TokenService } from 'src/app/service/token.service';
@@ -12,12 +12,12 @@ import { TokenService } from 'src/app/service/token.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  person!: PersonDTO;
+  person!: PersonGetDTO;
   isLogged: boolean = false;
   idPerson!: string;
   alert!: Alert;
 
-  constructor(private route: ActivatedRoute, private tokenService: TokenService, private personService: PersonService) {
+  constructor(private router: Router,private route: ActivatedRoute, private tokenService: TokenService, private personService: PersonService) {
 
     this.route.params.subscribe(params => {
       this.idPerson = params["idPerson"];
@@ -29,7 +29,7 @@ export class ProfileComponent {
         console.log("person : " + this.person)
       },
       error: error => {
-        this.alert =  new Alert(error.error.response,"danger");
+        console.log(error.error.response,"danger");
       }
     });   
 
@@ -75,6 +75,17 @@ export class ProfileComponent {
   }
 
   public updatePerson() {
-    console.log(this.person);
+    this.personService.updatePerson(this.idPerson, this.person).subscribe({
+      next: data => {
+        this.alert =  new Alert(data.response,"success");
+      },
+      error: error => {
+        this.alert = new Alert(error.error.response, "danger");
+      }
+    });
+  }
+
+  public changePassword(){
+    this.router.navigate(["/cambiar_contraseña",this.idPerson]);
   }
 }

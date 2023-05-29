@@ -15,7 +15,7 @@ export class PaymentMethodService {
 
   }
   public createPaymentMethod(paymentMethod: PaymentMethodDTO): Observable<MessageDTO> {
-    return this.http.post<MessageDTO>(`${this.userUrl}/crear`, paymentMethod);
+    return this.http.post<MessageDTO>(`${this.userUrl}/agregar`, paymentMethod);
   }
 
   public updatePaymentMethod(idPaymentMethod: number, paymentMethod: PaymentMethodGetDto): Observable<MessageDTO> {

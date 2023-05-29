@@ -17,16 +17,16 @@ export class PersonService {
     return this.http.put<MessageDTO>(`${this.userUrl}/actualizar/${id}`, person);
   }
 
-  public changePasswordRecuperated(id:string, password:PasswordDTO): Observable<MessageDTO> {
-    return this.http.put<MessageDTO>(`${this.userUrl}/recuperar_contraseña/${id}`, password);
+  public changePasswordRecuperated(Email:string, password:PasswordDTO): Observable<MessageDTO> {
+    return this.http.put<MessageDTO>(`${this.userUrl}/restaurar_contraseña/${Email}`, password);
   }
 
-  public changeOldPassword(id:string, password:PasswordDTO): Observable<MessageDTO> {
-    return this.http.put<MessageDTO>(`${this.userUrl}/cambiar_contraseña/${id}`, password);
+  public changeOldPassword(idPerson:string, password:PasswordDTO): Observable<MessageDTO> {
+    return this.http.put<MessageDTO>(`${this.userUrl}/cambiar_contraseña/${idPerson}`, password);
   }
 
   public recuperatePassword(email:string): Observable<MessageDTO> {
-    return this.http.put<MessageDTO>(`${this.userUrl}/recuperar_contraseña`, email);
+    return this.http.post<MessageDTO>(`${this.userUrl}/recuperar_contraseña`, email);
   }
   public get(idPerson:string): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener/${idPerson}`);

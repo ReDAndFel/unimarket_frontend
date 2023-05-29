@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { SessionService } from 'src/app/service/session.service';
 import { TokenService } from 'src/app/service/token.service';
+import {ProductService} from "../../service/product.service";
+import {ProductGetDTO} from "../../model/product-get-dto";
 
 @Component({
   selector: 'app-account',
@@ -10,15 +12,25 @@ import { TokenService } from 'src/app/service/token.service';
 export class AccountComponent {
   isLogged = false;
   isMod = false;
-  idPerson: string = "";
+  idPerson:string = ""
   name:string = "";
   roles!: string[];
+  favoriteProducts!:ProductGetDTO[];
 
-  constructor(private tokenService: TokenService, private sessionService : SessionService) {
+  constructor( private productService:ProductService, private tokenService: TokenService, private sessionService : SessionService) {
+    this.isLogged = this.tokenService.isLogged();
+
+
 
   }
- /* ngOnInit(): void {
+ /*ngOnInit(): void {
     const objeto = this;
+   this.sessionService.currentMessage.subscribe({
+     next: data => {
+       objeto.actualizarSesion(data);
+     }
+   });
+   this.actualizarSesion(this.tokenService.isLogged());
   }
 
   private actualizarSesion(estado: boolean) {
@@ -28,6 +40,15 @@ export class AccountComponent {
       this.name = this.tokenService.getName();
       this.roles = this.tokenService.getRol();
 
+      this.productService.listFavoriteProducts(this.idPerson).subscribe({
+        next: data => {
+          this.favoriteProducts = data.response;
+        },
+        error: error => {
+          console.log(error.error.response);
+        }
+      });
+
       if (this.roles[0] == "MODERADOR") {
 
         this.isMod = true;
@@ -35,18 +56,30 @@ export class AccountComponent {
     }
   }*/
   ngOnInit(): void {
-    this.isLogged = this.tokenService.isLogged();
+
     if (this.isLogged) {
       this.idPerson = this.tokenService.getId();
       this.name = this.tokenService.getName();
-    }
-    this.roles = this.tokenService.getRol();
-    if(this.roles[0] == "MODERADOR"){
-      this.isMod = true;
+
+      this.roles = this.tokenService.getRol();
+      if (this.roles[0] == "MODERADOR") {
+        this.isMod = true;
+      }
+
+      this.productService.listFavoriteProducts(this.idPerson).subscribe({
+        next: data => {
+          this.favoriteProducts = data.response;
+        },
+        error: error => {
+          console.log(error.error.response);
+        }
+
+
+      });
+
     }
   }
   public logout() {
-    this.tokenService.logout();
+      this.tokenService.logout();
+    }
   }
-
-}

@@ -12,6 +12,10 @@ export class ModeratorService {
   private userUrl = "http://localhost:8080/api/moderador";
 
   constructor(private http: HttpClient) { }
+
+  public listarAllProducts(): Observable<MessageDTO> {
+    return this.http.get<MessageDTO>(`${this.userUrl}/obtener_productos`);
+  }
   
   public listProductByState(state: string): Observable<MessageDTO> {
     return this.http.get<MessageDTO>(`${this.userUrl}/obtener_productos_estado/${state}`);

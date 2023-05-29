@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Alert } from 'src/app/model/alert';
+import { PersonService } from 'src/app/service/person.service';
 import {PasswordDTO} from "../../model/password-dto";
 
 @Component({
@@ -8,14 +11,29 @@ import {PasswordDTO} from "../../model/password-dto";
 })
 export class RestorePasswordComponent {
   restorePassword:PasswordDTO;
-  constructor() {
+  email!:string;
+  alert!: Alert;
+
+  constructor(private route: ActivatedRoute, private personService: PersonService) {
     this.restorePassword = new PasswordDTO();
+
+    this.route.params.subscribe(params => {
+      this.email = params["email"];
+    });
+
   }
   public restorePasswordFunction(){
-    console.log(this.restorePassword);
+    this.personService.changePasswordRecuperated(this.email, this.restorePassword).subscribe({
+      next: data => {   
+        this.alert =  new Alert(data.response,"success");
+      },
+      error: error => {
+        this.alert = new Alert(error.error.response, "danger");
+      }
+    });   
   }
   public passwordEquals():boolean{
-    return this.restorePassword.password == this.restorePassword.confirmedPassword;
+    return this.restorePassword.password == this.restorePassword.passwordRepeated;
   }
 
 }

@@ -5,6 +5,7 @@ import { ProductGetDTO } from "../../model/product-get-dto";
 import { TokenService } from 'src/app/service/token.service';
 import { Alert } from 'src/app/model/alert';
 import { SessionService } from 'src/app/service/session.service';
+import { max } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -58,15 +59,7 @@ export class HomeComponent {
     }
   }*/
   ngOnInit(): void {
-
-    this.productService.listarAllProducts().subscribe({
-      next: data => {
-        this.products = data.response;
-      },
-      error: error => {
-        console.log(error.error.response);
-      }
-    });
+   
     
     this.route.paramMap.subscribe(params => {
 
@@ -119,8 +112,21 @@ export class HomeComponent {
               console.log(error.error.response);
             }
           });
-        }         
+        }   
         
+        if(titulo == null && categoria ==null && minPrice==null && maxPrice == null){
+          this.productService.listarAllProducts().subscribe({
+            next: data => {
+              this.products = data.response;
+            },
+            error: error => {
+              console.log(error.error.response);
+            }
+          });        
+        }
+        
+
+
     });
     
     this.roles = this.tokenService.getRol();

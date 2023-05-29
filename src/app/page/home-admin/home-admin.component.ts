@@ -14,54 +14,25 @@ import { SessionService } from 'src/app/service/session.service';
 })
 export class HomeAdminComponent {
 
-  textoBusqueda!: string;
-  minPrice!: string;
-  maxPrice!: string;
   filter!: string;
-  products!: ProductGetDTO[];
-  filtro!: ProductGetDTO[]
-  roles!: string[];
-  isMod = false;
+  products: ProductGetDTO[] = [];
   alert!: Alert;
-  isLogged:boolean = false;
-
-  constructor(private router: Router, private route: ActivatedRoute, private tokenService: TokenService, private moderatorService: ModeratorService, private sessionService : SessionService) {
-    this.route.params.subscribe(params => {
-      this.textoBusqueda = params["text"];
-      this.filter = params["filter"];
-      this.minPrice = params["minPrice"];
-      this.maxPrice = params["maxPrice"];
+  isLogged: boolean = false;
 
 
-      console.log(this.minPrice);
-      console.log(this.maxPrice);
-      console.log(this.filter);
-      console.log(this.textoBusqueda);
-
-      if (this.textoBusqueda && this.filter == "estado") {
-        this.moderatorService.listProductByState(this.textoBusqueda).subscribe({
-          next: data => {
-            this.products = data.response;
-            this.filtro = this.products;
-            console.log(this.products);
-          },
-          error: error => {
-            console.log(error.error.response);
-          }
-        });
-
-      }
-    });
+  constructor(private moderatorService: ModeratorService, private router: Router, private route: ActivatedRoute, private productService: ProductService, private tokenService: TokenService, private sessionService: SessionService) {
 
 
   }
   public iraBusqueda(valor: string) {
     if (valor) {
-      this.router.navigate(["busqueda/estado", valor]);
+      this.router.navigate(["busqueda/titulo", valor]);
+    } else {
+      this.router.navigate([""]);
     }
   }
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     const objeto = this;
     this.sessionService.currentMessage.subscribe({
       next: data => {
@@ -81,12 +52,54 @@ export class HomeAdminComponent {
         this.isMod = true;
       }
     }
-  }
-  /*ngOnInit(): void {
-    this.roles = this.tokenService.getRol();
-
-    if (this.roles[0].toString() == "MODERADOR") {
-      this.isMod = true;
-    }
   }*/
+  ngOnInit(): void {
+
+    this.route.paramMap.subscribe(params => {
+
+      const titulo = params.get("textTitulo");
+      const state = params.get("state");
+
+      if (titulo != null) {
+        console.log("titulo es diferente de null!")
+        this.productService.listProductByTitle(titulo).subscribe({
+          next: data => {
+            this.products = data.response;
+          },
+          error: error => {
+            console.log(error.error.response);
+          }
+        });
+      }
+
+      if (state != null) {
+        console.log("estado es diferente de null!");
+
+        this.moderatorService.listProductByState(state).subscribe({
+          next: data => {
+
+            this.products = data.response;
+            console.log(this.products);
+
+          },
+          error: error => {
+            console.log(error.error.response);
+          }
+        });
+      }
+
+      if(titulo == null && state ==null){
+        this.moderatorService.listarAllProducts().subscribe({
+          next: data => {
+            this.products = data.response;
+          },
+          error: error => {
+            console.log(error.error.response);
+          }
+        });        
+      }
+
+    });
+  }
+
 }

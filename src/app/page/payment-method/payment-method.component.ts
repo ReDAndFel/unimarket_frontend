@@ -27,7 +27,7 @@ export class PaymentMethodComponent {
   ngOnInit(): void {
     this.isLogged = this.tokenService.isLogged();
     if (this.isLogged) {
-          
+
       this.paymentMethodService.listPaymentMethodByPerson(this.idPerson).subscribe({
         next: data => {
           console.log(data.response);
@@ -58,7 +58,7 @@ export class PaymentMethodComponent {
   }
 
 }
-  
+
   /*ngOnInit(): void {
     const objeto = this;
     this.sessionService.currentMessage.subscribe({
@@ -84,4 +84,4 @@ export class PaymentMethodComponent {
     }
   }*/
 
-  
+

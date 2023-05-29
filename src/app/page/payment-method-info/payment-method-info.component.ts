@@ -12,7 +12,7 @@ import { PaymentMethodGetDto } from 'src/app/model/payment-method-get-dto';
   styleUrls: ['./payment-method-info.component.css']
 })
 export class PaymentMethodInfoComponent {
-  
+
   isLogged:boolean = false;
   paymentMethod!: PaymentMethodDTO;
   idPerson!:string;
@@ -20,11 +20,16 @@ export class PaymentMethodInfoComponent {
 
   constructor(private route: ActivatedRoute,private paymentMethodService : PaymentMethodService,private sessionService : SessionService, private tokenService : TokenService) {
     this.route.params.subscribe(params => {
-      this.idPaymentMethod = params["id"];      
+      this.idPaymentMethod = params["id"];
   });
+
+    this.paymentMethod = new PaymentMethodDTO();
+   /* this.route.params.subscribe(params => {
+      this.idPerson = params["idPerson"];
+    });*/
 }
 
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     const objeto = this;
     this.sessionService.currentMessage.subscribe({
       next: data => {
@@ -37,10 +42,15 @@ export class PaymentMethodInfoComponent {
   private actualizarSesion(estado: boolean) {
     this.isLogged = estado;
     if (estado) {
-      this.idPerson = this.tokenService.getId()     
+      this.idPerson = this.tokenService.getId()
+    }
+  }*/
+  ngOnInit(): void {
+    this.isLogged = this.tokenService.isLogged();
+    if (this.isLogged) {
+      this.idPerson = this.tokenService.getId()
     }
   }
-
   public createPaymentMethod(){
     this.paymentMethod.idPerson = this.idPerson;
       this.paymentMethodService.createPaymentMethod(this.paymentMethod).subscribe({

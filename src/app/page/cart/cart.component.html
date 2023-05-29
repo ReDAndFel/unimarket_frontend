@@ -11,7 +11,7 @@
           <table class="table">
             <thead>
               <tr>
-                
+
                 <th>Producto</th>
                 <th>Precio</th>
                 <th>Unidades</th>
@@ -20,7 +20,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of products">
-                
+
                 <td>
                   <div class="d-flex text-start align-items-center">
                     <div class="col-4 me-3 ms-3">
@@ -35,7 +35,7 @@
                 <td class="align-middle">
 
                   <input type="number" name="unidades" class="form-control text-center" [(ngModel)]="item.units" min="0" (change)="updateTotalPrice()" />
-                  
+
                 </td>
                 <td class="align-middle">
                   <span>$ {{item.units * item.product.price}}</span>
@@ -62,7 +62,7 @@
                     </div>
                   </div>
                 </div>
-                
+
               </tr>
             </tbody>
           </table>
@@ -70,7 +70,14 @@
         <div class="mt-5 d-flex justify-content-end">
           <div class="text-end">
             <h4>Valor a pagar: ${{totalPrice}}</h4>
-            <button class="btn btn-primary"><i class="fa-regular fa-credit-card"></i>
+            <div class="textfield cbPaymentMethod">
+              <label>Categoría: </label>
+              <select name="paymentMethod" [(ngModel)]="transaction.idPaymentMethod" required>
+                <option value="" selected>Seleccione su metodo de pago</option>
+                <option [value]="item.id" *ngFor="let item of paymentMethods; index as i"> {{item.bankingEntity}} {{item.cardNumber}} </option>
+              </select>
+            </div>
+            <button class="btn btn-primary" (click)="createTransaction()"><i class="fa-regular fa-credit-card"></i>
               Comprar</button>
           </div>
         </div>
@@ -83,6 +90,6 @@
     <app-nav-user></app-nav-user>
   </div>
 
-  
+
 
 </ng-template>

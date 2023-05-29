@@ -74,7 +74,11 @@
 }
 
 .favorite_product_list{
-  border: 1px solid black;
   width: 100%;
   padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  max-height: 40em;
+  overflow-y: scroll;
 }
