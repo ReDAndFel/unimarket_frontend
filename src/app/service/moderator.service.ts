@@ -9,7 +9,7 @@ import { ProductGetDTO } from '../model/product-get-dto';
 })
 export class ModeratorService {
 
-  private userUrl = "http://localhost:8080/api/moderador";
+  private userUrl = "unimarket-production-29a2.up.railway.app/api/moderador";
 
   constructor(private http: HttpClient) { }
 

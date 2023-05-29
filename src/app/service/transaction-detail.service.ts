@@ -7,7 +7,7 @@ import { MessageDTO } from '../model/message-dto';
   providedIn: 'root'
 })
 export class TransactionDetailService {
-  private userUrl = "http://localhost:8080/api/detalles_transacciones";
+  private userUrl = "unimarket-production-29a2.up.railway.app/api/detalles_transacciones";
 
   constructor(private http: HttpClient) {}
 

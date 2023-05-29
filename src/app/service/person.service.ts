@@ -9,7 +9,7 @@ import { PersonGetDTO } from '../model/person-get-dto';
   providedIn: 'root'
 })
 export class PersonService {
-  private userUrl = "http://localhost:8080/api/personas";
+  private userUrl = "unimarket-production-29a2.up.railway.app/api/personas";
 
   constructor(private http: HttpClient) { }
   

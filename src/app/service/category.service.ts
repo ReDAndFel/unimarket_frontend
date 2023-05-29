@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class CategoryService {
 
-  private catURL = "http://localhost:8080/api/categorias";
+  private catURL = "unimarket-production-29a2.up.railway.app/api/categorias";
 
   categories!: any[];;
   constructor(private http: HttpClient) {

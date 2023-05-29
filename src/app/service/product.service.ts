@@ -13,7 +13,7 @@ export class ProductService {
 
   favoriteProductsPerson!:ProductGetDTO[];
 
-  private userUrl = "http://localhost:8080/api/productos";
+  private userUrl = "unimarket-production-29a2.up.railway.app/api/productos";
   constructor(private http: HttpClient) {
 
   }

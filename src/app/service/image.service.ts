@@ -9,7 +9,7 @@ import { MessageDTO } from '../model/message-dto';
 })
 export class ImageService {
 
-  private imgURL = "http://localhost:8080/api/imagenes";
+  private imgURL = "unimarket-production-29a2.up.railway.app/api/imagenes";
 
   constructor(private http: HttpClient) { }
 

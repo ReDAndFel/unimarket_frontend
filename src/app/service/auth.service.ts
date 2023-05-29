@@ -11,7 +11,7 @@ import { TokenDTO } from '../model/token-dto';
 })
 export class AuthService {
 
-  private authURL = "http://localhost:8080/api/auth";
+  private authURL = "unimarket-production-29a2.up.railway.app/api/auth";
   constructor(private http:HttpClient) { }
 
   public registrar(usuario:PersonDTO):Observable<MessageDTO>{

@@ -10,7 +10,7 @@ import { PaymentMethodDTO } from '../model/payment-method-dto';
 })
 export class PaymentMethodService {
 
-  private userUrl = "http://localhost:8080/api/metodos_de_pago";
+  private userUrl = "unimarket-production-29a2.up.railway.app/api/metodos_de_pago";
   constructor(private http: HttpClient) {
 
   }

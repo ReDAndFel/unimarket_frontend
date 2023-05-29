@@ -9,7 +9,7 @@ import { MessageDTO } from '../model/message-dto';
 })
 export class CommentService {
 
-  private userUrl = "http://localhost:8080/api/comentarios";
+  private userUrl = "unimarket-production-29a2.up.railway.app/api/comentarios";
   constructor(private http: HttpClient) {
 
   }
